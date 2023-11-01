@@ -1,6 +1,5 @@
 public class Scraper {
 	
-
 	public  void nanonets() throws IOException {
 		String url = "https://www.ratemyprofessors.com/professor/1281160";
 		URL obj = new URL(url);
