@@ -1,3 +1,8 @@
+/**
+ * Professor Object Class
+ * Copyright 2023 Miles Clements
+ */
+
 package source.Classify;
 import java.util.ArrayList;
 
