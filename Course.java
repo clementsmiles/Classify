@@ -3,7 +3,7 @@
  * Copyright 2023 Miles Clements
  */
 
-package source.Classify;
+package source;
 
 public class Course {
     
