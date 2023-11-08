@@ -15,6 +15,7 @@ public class Professor {
     
     // Constructor for a Professor object.
     public Professor(String name, ArrayList<Course> courses) {
+        //oh hey, this is lombardi
         this.name = name;
         this.courses = courses;
     }
