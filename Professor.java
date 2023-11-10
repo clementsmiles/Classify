@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class Professor {
     
     // Name of professor
-	// jake wrote this comment
     private String name;
     // ArrayList of all courses professor is planning on teaching.
     private ArrayList<Course> courses;
