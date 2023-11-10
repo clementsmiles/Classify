@@ -5,11 +5,20 @@
 
 package source;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 
 public class Driver {
     
-    
+    /**
+     * @throws FileNotFoundException 
+     * 
+     */
+    public static void readData() throws FileNotFoundException {
+        BufferedReader br = new BufferedReader(new FileReader("data.csv"));
+    }
     
     /**
      * This method should allow the user to input a course or professor
