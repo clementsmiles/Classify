@@ -4,8 +4,12 @@
  */
 
 package source;
+import java.util.Scanner;
+
 
 public class Driver {
+    
+    
     
     /**
      * This method should allow the user to input a course or professor
@@ -23,11 +27,21 @@ public class Driver {
      * to select the mode they'd like to search in. (Classes/Professor).
      * Copyright 2023 Insert Names Here
      */
-    public static void modeMenu() {
-        
+    public static boolean modeMenu() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome to Classify! This is a command line version of the planned GUI. \nPlease select an option: \n1. Search for Courses\n 2. Search for Professors");
+        int option = 0;
+        option = sc.nextInt();
+        System.out.println("You have selected: " + option);
+        sc.close();
+        return true;
     }
     
     public static void main(String[] args) {
-        
+        boolean menu = false;
+        while (!menu) {
+            modeMenu();
+        }
+        // end program
     }
 }
