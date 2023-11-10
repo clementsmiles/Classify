@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Driver {
     
+    
+    
     /**
      * This method should allow the user to input a course or professor
      * (could potentially be an overloaded method) and show the results
