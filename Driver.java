@@ -5,19 +5,28 @@
 
 package source;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 
 public class Driver {
     
+    
     /**
-     * @throws FileNotFoundException 
-     * 
+     * Test method
+     * Reads course data from the supplied .csv file
+     * @throws IOException 
      */
-    public static void readData() throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader("data.csv"));
+    public static void readData(ArrayList<Course> classData) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("src\\source\\classData.csv"));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] lines = line.split(",");
+            Course c = new Course(lines[0], lines[1], lines[2], lines[3]);
+            classData.add(c);
+        }
     }
     
     /**
@@ -47,6 +56,12 @@ public class Driver {
     }
     
     public static void main(String[] args) {
+        ArrayList<Course> classData = new ArrayList<>();
+        try {
+            readData(classData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         boolean menu = false;
         while (!menu) {
             modeMenu();
