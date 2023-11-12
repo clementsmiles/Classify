@@ -29,6 +29,20 @@ public class Driver {
         }
     }
     
+    public boolean checkEquality(Course currentCourse, String d, String c) {
+        if (d.equals(currentCourse.getDepartment())) {
+            
+        }
+        return false;
+    }
+    
+    public static void courseQuery(String department, String courseNum, ArrayList<Course> courseData) {
+        for (int i = 0; i < courseData.size(); i++) {
+           
+            
+        }
+    }
+    
     /**
      * This method should allow the user to input a course or professor
      * (could potentially be an overloaded method) and show the results

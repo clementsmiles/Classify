@@ -20,5 +20,12 @@ public class Course {
         this.section = section;
     }
     
+    public String getDepartment() {
+        return department;
+    }
+    
+    public String courseNum() {
+        return courseNum;
+    }
     
 }
