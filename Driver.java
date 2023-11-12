@@ -31,7 +31,11 @@ public class Driver {
     
     public boolean checkEquality(Course currentCourse, String d, String c) {
         if (d.equals(currentCourse.getDepartment())) {
-            
+            if (c.length() == 1) {
+                
+            } else {
+
+            }
         }
         return false;
     }

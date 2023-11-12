@@ -24,7 +24,7 @@ public class Course {
         return department;
     }
     
-    public String courseNum() {
+    public String getCourseNum() {
         return courseNum;
     }
     
