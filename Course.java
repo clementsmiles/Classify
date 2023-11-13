@@ -8,8 +8,8 @@ package source;
 public class Course {
     
     private String department;
-    // STRING for testing purposes, should be of type Professor
     private String courseNum;
+    // STRING for testing purposes, should be of type Professor
     private String professor;
     private String section;
     
@@ -28,4 +28,8 @@ public class Course {
         return courseNum;
     }
     
+    public void print() {
+        System.out.println(this.department + " " + this.courseNum + " "
+    + this.section + " " + this.professor);
+    }
 }

@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class Driver {
     
+    static ArrayList<Course> classData;
     
     /**
      * Test method
@@ -29,12 +30,16 @@ public class Driver {
         }
     }
     
-    public boolean checkEquality(Course currentCourse, String d, String c) {
+    public static boolean checkEquality(Course currentCourse, String d, String c) {
         if (d.equals(currentCourse.getDepartment())) {
             if (c.length() == 1) {
-                
+                if (c.equals(currentCourse.getCourseNum().substring(0, 1))) {
+                    return true;
+                }
             } else {
-
+                if (c.equals(currentCourse.getCourseNum())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -42,9 +47,35 @@ public class Driver {
     
     public static void courseQuery(String department, String courseNum, ArrayList<Course> courseData) {
         for (int i = 0; i < courseData.size(); i++) {
-           
-            
+           if (checkEquality(courseData.get(i), department, courseNum)) {
+               courseData.get(i).print();
+           }
         }
+    }
+    
+    public static String chooseDepartment(Scanner sc) {
+        System.out.println("Select a department: \n1. CSE\n2. STA\n3. ENG\n4. LMS");
+        String option = "";
+        option = sc.nextLine();
+        switch (option) {
+        case "1":
+            return "CSE";
+        case "2":
+            return "STA";
+        case "3":
+            return "ENG";
+        case "4":
+            return "LMS";
+        default:
+            return "error";
+        }
+    }
+    
+    public static String chooseNumber(Scanner sc) {
+        System.out.println("Please enter a course number. Entering one digit will search for all classes of that level.");
+        String number = "";
+        number = sc.nextLine();
+        return number;
     }
     
     /**
@@ -54,8 +85,15 @@ public class Driver {
      * go back to the previous menu, and select between course or professor.
      * Copyright 2023 Insert Names Here
      */
-    public static void searchMenu() {
-        
+    public static void courseMenu(Scanner sc) {
+        System.out.println("What would you like to do? \n1. Search by department"
+                + " and course number");
+        String option = "";
+        option = sc.nextLine();
+        // Since there's only one option here right now im not gonna bother checking
+        String department = chooseDepartment(sc);
+        String courseNum = chooseNumber(sc);
+        courseQuery(department, courseNum, classData);
     }
     
     /**
@@ -63,27 +101,35 @@ public class Driver {
      * to select the mode they'd like to search in. (Classes/Professor).
      * Copyright 2023 Insert Names Here
      */
-    public static boolean modeMenu() {
-        Scanner sc = new Scanner(System.in);
+    public static boolean modeMenu(Scanner sc) {
         System.out.println("Welcome to Classify! This is a command line version of the planned GUI. \nPlease select an option: \n1. Search for Courses\n 2. Search for Professors");
-        int option = 0;
-        option = sc.nextInt();
+        String option = "0";
+        option = sc.nextLine();
         System.out.println("You have selected: " + option);
-        sc.close();
+        switch (option) {
+        case "1":
+            courseMenu(sc);
+            break;
+        default:
+            System.out.println("Invalid input: " + option);
+            break;
+        }
         return true;
     }
     
     public static void main(String[] args) {
-        ArrayList<Course> classData = new ArrayList<>();
+        classData = new ArrayList<>();
         try {
             readData(classData);
         } catch (IOException e) {
             e.printStackTrace();
         }
         boolean menu = false;
+        Scanner sc = new Scanner(System.in);
         while (!menu) {
-            modeMenu();
+            modeMenu(sc);
         }
+        sc.close();
         // end program
     }
 }
