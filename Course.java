@@ -8,17 +8,27 @@ package source;
 public class Course {
     
     private String department;
-    // STRING for testing purposes, should be of type Professor
     private String courseNum;
-    private String professor;
+    private Professor professor;
     private String section;
     
-    public Course(String department, String courseNum, String professor, String section) {
+    public Course(String department, String courseNum, Professor professor, String section) {
         this.department = department;
         this.courseNum = courseNum;
         this.professor = professor;
         this.section = section;
     }
     
+    public String getDepartment() {
+        return department;
+    }
     
+    public String getCourseNum() {
+        return courseNum;
+    }
+    
+    public void print() {
+        System.out.println(this.department + " " + this.courseNum + " "
+    + this.section + " " + this.professor.getName());
+    }
 }
