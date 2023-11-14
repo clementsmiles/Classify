@@ -7,6 +7,8 @@ package source;
 
 public class Course {
     
+    // This is in the main branch
+    
     private String department;
     private String courseNum;
     private Professor professor;
