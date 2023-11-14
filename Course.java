@@ -8,6 +8,7 @@ package source;
 public class Course {
     
     // This comment is testing branches in GitHub
+
     
     private String department;
     private String courseNum;
