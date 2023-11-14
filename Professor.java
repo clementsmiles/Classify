@@ -15,4 +15,12 @@ public class Professor {
         this.name = name;
         this.courses = courses;
     }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public void addCourse(Course c) {
+        courses.add(c);
+    }
 }

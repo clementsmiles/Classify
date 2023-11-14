@@ -14,6 +14,34 @@ import java.io.IOException;
 public class Driver {
     
     static ArrayList<Course> classData;
+    static ArrayList<Professor> profData;
+    
+    
+    public static Professor getProfByName(String name) {
+        for (int i = 0; i < profData.size(); i++) {
+            if (name.equals(profData.get(i).getName())) {
+                return profData.get(i);
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Checks if a professor exists in the data by name.
+     * @param name
+     * @return
+     */
+    public static boolean profExists(String name) {
+        if (profData.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < profData.size(); i++) {
+            if (name.equals(profData.get(i).getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     /**
      * Test method
@@ -25,8 +53,15 @@ public class Driver {
         String line;
         while ((line = br.readLine()) != null) {
             String[] lines = line.split(",");
-            Course c = new Course(lines[0], lines[1], lines[2], lines[3]);
+            Professor p;
+            if (profExists(lines[2])) {
+                p = getProfByName(lines[2]);
+            } else {
+                p = new Professor(lines[2], new ArrayList<Course>());
+            }
+            Course c = new Course(lines[0], lines[1], p, lines[3]);
             classData.add(c);
+            p.addCourse(c);
         }
     }
     
@@ -119,6 +154,7 @@ public class Driver {
     
     public static void main(String[] args) {
         classData = new ArrayList<>();
+        profData = new ArrayList<>();
         try {
             readData(classData);
         } catch (IOException e) {

@@ -9,11 +9,10 @@ public class Course {
     
     private String department;
     private String courseNum;
-    // STRING for testing purposes, should be of type Professor
-    private String professor;
+    private Professor professor;
     private String section;
     
-    public Course(String department, String courseNum, String professor, String section) {
+    public Course(String department, String courseNum, Professor professor, String section) {
         this.department = department;
         this.courseNum = courseNum;
         this.professor = professor;
@@ -30,6 +29,6 @@ public class Course {
     
     public void print() {
         System.out.println(this.department + " " + this.courseNum + " "
-    + this.section + " " + this.professor);
+    + this.section + " " + this.professor.getName());
     }
 }
