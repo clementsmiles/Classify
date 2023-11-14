@@ -9,7 +9,6 @@ public class Course {
     
     // This comment is testing branches in GitHub
 
-    
     private String department;
     private String courseNum;
     private Professor professor;
