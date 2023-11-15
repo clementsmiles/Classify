@@ -31,4 +31,11 @@ public class Course {
         System.out.println(this.department + " " + this.courseNum + " "
     + this.section + " " + this.professor.getName());
     }
+    
+    public void profDataPrint() {
+        System.out.println(this.department + " " + this.courseNum + " " 
+                + this.section);
+    }
+    
+    
 }
