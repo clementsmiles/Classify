@@ -1,6 +1,6 @@
 /**
  * Driver Class for Classify Application
- * Copyright 2023 Miles Clements
+ * Copyright 2023 Miles Clements, Jake Ross
  */
 
 package source;
@@ -89,6 +89,7 @@ public class Driver {
         }
     }
     
+
     public static void profQuery(String profName) {
         
         
@@ -99,6 +100,48 @@ public class Driver {
                 break;
             }
         }
+    }
+    
+    // overloaded method to do the same with no course num
+    public static void courseQuery(String department, ArrayList<Course> courseData) {
+        for (int i = 0; i < courseData.size(); i++) {
+           if (courseData.get(i).getDepartment().equals(department)) {
+        	   courseData.get(i).print();
+           }
+        }
+    }
+    
+    // overloaded method, intakes a bool to determine what to do
+    // true means filter higher stuff out
+    // false means filter lower stuff out
+    public static void courseQuery(String courseNum, ArrayList<Course> courseData, boolean higherOrLower) {
+    	int workNum;
+    	int courseInt = Integer.parseInt(courseNum);
+    	if (higherOrLower) { // smaller
+    		for (int i = 0; i < courseData.size(); i++) {
+            	workNum = Integer.parseInt(courseData.get(i).getCourseNum());
+            	if (workNum <= courseInt) {
+            		courseData.get(i).print();
+            	}
+            }
+    	} else { // larger
+    		for (int i = 0; i < courseData.size(); i++) {
+            	workNum = Integer.parseInt(courseData.get(i).getCourseNum());
+            	if (workNum >= courseInt) {
+            		courseData.get(i).print();
+            	}
+            }
+    	}
+    }
+    
+    // will return true if the number is valid, false if its not
+    public static boolean numIsValid(String num) {
+    	try {
+    		Integer.parseInt(num);
+    		return true;
+    	} catch (Exception e) {
+    		return false;
+    	}
     }
     
     public static String chooseDepartment(Scanner sc) {
@@ -135,13 +178,48 @@ public class Driver {
      */
     public static void courseMenu(Scanner sc) {
         System.out.println("What would you like to do? \n1. Search by department"
-                + " and course number");
+                + " AND course number\n2. Filter by department\n3. Filter courses"
+                + " above a threshold (inclusive)\n4. Filter courses below a"
+                + " threshold (inclusive)");
         String option = "";
         option = sc.nextLine();
-        // Since there's only one option here right now im not gonna bother checking
-        String department = chooseDepartment(sc);
-        String courseNum = chooseNumber(sc);
-        courseQuery(department, courseNum, classData);
+        String department = "";
+        String courseNum = "";
+        switch (option) {
+        // option 1, both department and number
+        case "1":
+        	department = chooseDepartment(sc);
+            courseNum = chooseNumber(sc);
+            courseQuery(department, courseNum, classData);
+            break;
+        // option 2, just department
+        case "2":
+        	department = chooseDepartment(sc);
+        	courseQuery(department, classData);
+        	break;
+        // option 3, filter out higher course nums
+        case "3":
+        	courseNum = chooseNumber(sc);
+        	if (numIsValid(courseNum)) {
+        		courseQuery(courseNum, classData, false);
+        	} else {
+        		System.out.println("Invalid input, returning to main menu!");
+        	}
+        	break;
+        // option 4, filter out lower course nums
+        case "4":
+        	courseNum = chooseNumber(sc);
+        	if (numIsValid(courseNum)) {
+        		courseQuery(courseNum, classData, true);
+        	} else {
+        		System.out.println("Invalid input, returning to main menu!");
+        	}
+        	break;
+        // catch the user input error
+        default:
+        	System.out.println("Invalid input, returning to main menu!");
+        	break;
+        }
     }
     
     /**
@@ -173,7 +251,7 @@ public class Driver {
      * Copyright 2023 Insert Names Here
      */
     public static boolean modeMenu(Scanner sc) {
-        System.out.println("Welcome to Classify! DISCLAIMER: This is a command line version of the planned GUI. The data used in this demo may not be accurate to the actual 2024 Spring schedule. \nPlease select an option: \n1. Search for Courses\n 2. Search for Professors");
+        System.out.println("Welcome to Classify! DISCLAIMER: This is a command line version of the planned GUI. The data used in this demo may not be accurate to the actual 2024 Spring schedule. \nPlease select an option: \n1. Search for Courses\n2. Search for Professors");
         String option = "0";
         option = sc.nextLine();
         System.out.println("You have selected: " + option);
