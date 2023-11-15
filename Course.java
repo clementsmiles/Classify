@@ -27,6 +27,10 @@ public class Course {
         return courseNum;
     }
     
+    public String getProfName() {
+        return professor.getName();
+    }
+    
     public void print() {
         System.out.println(this.department + " " + this.courseNum + " "
     + this.section + " " + this.professor.getName());
