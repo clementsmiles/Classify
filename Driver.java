@@ -155,7 +155,7 @@ public class Driver {
      * Copyright 2023 Insert Names Here
      */
     public static boolean modeMenu(Scanner sc) {
-        System.out.println("Welcome to Classify! DISCLAIMER: This is a command line version of the planned GUI. The data used in this demo may not be accurate to the actual 2024 Spring schedule. \nPlease select an option: \n1. Search for Courses\n 2. Search for Professors");
+        System.out.println("Welcome to Classify! DISCLAIMER: This is a command line version of the planned GUI. The data used in this demo may not be accurate to the actual 2024 Spring schedule. \nPlease select an option: \n1. Search for Courses\n2. Search for Professors");
         String option = "0";
         option = sc.nextLine();
         System.out.println("You have selected: " + option);
