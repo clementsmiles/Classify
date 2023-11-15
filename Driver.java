@@ -222,6 +222,17 @@ public class Driver {
         }
     }
     
+    public static void professorsTeachingClasses(String department, String number, ArrayList<Course> courseData) {
+    	for (int i = 0; i < courseData.size(); i++) {
+    		if (courseData.get(i).getDepartment().equals(department)) {
+    			if (courseData.get(i).getCourseNum().equals(number)) {
+    				courseData.get(i).printProfessor();
+    				System.out.println();
+    			}
+    		}
+    	}
+    }
+    
     /**
      * This method will allow the user to enter the name of a professor
      * and then all the information about that professor will be returned.
@@ -231,18 +242,38 @@ public class Driver {
      * @param sc
      */
     public static void profMenu(Scanner sc) {
-        System.out.println("Please type in the first and last name of a professor");
-        String professor = "";
-        professor = sc.nextLine();
-        if(profExists(professor)) {
-            System.out.println(professor + " teaches the following class(es)");
-            profQuery(professor);
-            
-        } else {
-            System.out.print("No such professor in the registry");
+        System.out.println("What would you like to do?\n1. Search professor to find what"
+        		+ " courses they teach\n2. Search professors teaching certain classes");
+        String option = "";
+        option = sc.nextLine();
+        switch (option) {
+        // option 1, search professor to find out what classes they teach
+        case "1":
+        	System.out.println("Please type in the name of a professor");
+        	String professor = "";
+            professor = sc.nextLine();
+        	if(profExists(professor)) {
+                System.out.println(professor + " teaches the following class(es)");
+                profQuery(professor);
+                
+            } else {
+                System.out.println("No such professor in the registry");
+            }
+        	break;
+        case "2":
+        	// add stuff here
+        	String department = "";
+        	String number = "";
+        	System.out.println("Please type the department of the course");
+        	department = sc.nextLine();
+        	System.out.println("Please type the number of the course");
+        	number = sc.nextLine();
+        	professorsTeachingClasses(department, number, classData);
+        	break;
+        default:
+        	System.out.println("Invalid input, returning to main menu!");
+        	break;
         }
-        
-        
     }
     
     /**
@@ -251,17 +282,21 @@ public class Driver {
      * Copyright 2023 Insert Names Here
      */
     public static boolean modeMenu(Scanner sc) {
-        System.out.println("Welcome to Classify! DISCLAIMER: This is a command line version of the planned GUI. The data used in this demo may not be accurate to the actual 2024 Spring schedule. \nPlease select an option: \n1. Search for Courses\n2. Search for Professors");
+        System.out.println("Welcome to Classify! DISCLAIMER: This is a command line version of the planned GUI. The data used in this demo may not be accurate to the actual 2024 Spring schedule. \nPlease select an option: \n1. Search for Courses\n2. Search for Professors\n3. Exit the program");
         String option = "0";
         option = sc.nextLine();
-        System.out.println("You have selected: " + option);
         switch (option) {
         case "1":
+        	System.out.println("You have selected: " + option);
             courseMenu(sc);
             break;
         case "2":
+        	System.out.println("You have selected: " + option);
             profMenu(sc);
             break;
+        case "3":
+        	System.out.println("Exiting now.");
+        	System.exit(0);
         default:
             System.out.println("Invalid input: " + option);
             break;
