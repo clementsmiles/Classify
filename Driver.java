@@ -169,6 +169,32 @@ public class Driver {
         return number;
     }
     
+    public static ArrayList<Course> deepCopy() {
+        ArrayList<Course> copy = new ArrayList<Course>();
+        for (int i = 0; i < classData.size(); i++) {
+            copy.add(classData.get(i));
+        }
+        return copy;
+    }
+    
+    public static ArrayList<Course> addToBlacklist(Scanner sc, ArrayList<Course> c) {
+        System.out.println("Please enter professor name to blacklist.");
+        String input = "";
+        input = sc.nextLine();
+        if (!profExists(input)) {
+            System.out.println("Professor does not exist.");
+            return c;
+        }
+        for (int i = 0; i < c.size(); i++) {
+            if (input.equals(c.get(i).getProfName())) {
+                c.remove(i);
+                i--;
+            }
+        }
+        System.out.println(input + " successfully added to blacklist!");
+        return c;
+    }
+    
     /**
      * This method should allow the user to input a course or professor
      * (could potentially be an overloaded method) and show the results
@@ -177,49 +203,62 @@ public class Driver {
      * Copyright 2023 Insert Names Here
      */
     public static void courseMenu(Scanner sc) {
-        System.out.println("What would you like to do? \n1. Search by department"
-                + " AND course number\n2. Filter by department\n3. Filter courses"
-                + " above a threshold (inclusive)\n4. Filter courses below a"
-                + " threshold (inclusive)");
-        String option = "";
-        option = sc.nextLine();
-        String department = "";
-        String courseNum = "";
-        switch (option) {
-        // option 1, both department and number
-        case "1":
-        	department = chooseDepartment(sc);
-            courseNum = chooseNumber(sc);
-            courseQuery(department, courseNum, classData);
-            break;
-        // option 2, just department
-        case "2":
-        	department = chooseDepartment(sc);
-        	courseQuery(department, classData);
-        	break;
-        // option 3, filter out higher course nums
-        case "3":
-        	courseNum = chooseNumber(sc);
-        	if (numIsValid(courseNum)) {
-        		courseQuery(courseNum, classData, false);
-        	} else {
-        		System.out.println("Invalid input, returning to main menu!");
-        	}
-        	break;
-        // option 4, filter out lower course nums
-        case "4":
-        	courseNum = chooseNumber(sc);
-        	if (numIsValid(courseNum)) {
-        		courseQuery(courseNum, classData, true);
-        	} else {
-        		System.out.println("Invalid input, returning to main menu!");
-        	}
-        	break;
-        // catch the user input error
-        default:
-        	System.out.println("Invalid input, returning to main menu!");
-        	break;
+        ArrayList<Course> bList = deepCopy();
+        boolean endLoop = false;
+        while (!endLoop) {
+            System.out.println("What would you like to do? \n1. Search by department"
+                    + " AND course number\n2. Filter by department\n3. Filter courses"
+                    + " above a threshold (inclusive)\n4. Filter courses below a"
+                    + " threshold (inclusive)\n5. Add professors to blacklist");
+            String option = "";
+            option = sc.nextLine();
+            String department = "";
+            String courseNum = "";
+            switch (option) {
+            // option 1, both department and number
+            case "1":
+                department = chooseDepartment(sc);
+                courseNum = chooseNumber(sc);
+                courseQuery(department, courseNum, bList);
+                endLoop = true;
+                break;
+            // option 2, just department
+            case "2":
+                department = chooseDepartment(sc);
+                courseQuery(department, bList);
+                endLoop = true;
+                break;
+            // option 3, filter out higher course nums
+            case "3":
+                courseNum = chooseNumber(sc);
+                if (numIsValid(courseNum)) {
+                    courseQuery(courseNum, bList, false);
+                } else {
+                    System.out.println("Invalid input, returning to main menu!");
+                }
+                endLoop = true;
+                break;
+            // option 4, filter out lower course nums
+            case "4":
+                courseNum = chooseNumber(sc);
+                if (numIsValid(courseNum)) {
+                    courseQuery(courseNum, bList, true);
+                } else {
+                    System.out.println("Invalid input, returning to main menu!");
+                }
+                endLoop = true;
+                break;
+            // catch the user input error
+            case "5":
+                bList = addToBlacklist(sc, bList);
+                break;
+            default:
+                System.out.println("Invalid input, returning to main menu!");
+                endLoop = true;
+                break;
+            }
         }
+        
     }
     
     public static void professorsTeachingClasses(String department, String number, ArrayList<Course> courseData) {
