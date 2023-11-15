@@ -1,6 +1,6 @@
 /**
  * Driver Class for Classify Application
- * Copyright 2023 Miles Clements
+ * Copyright 2023 Miles Clements, Jake Ross
  */
 
 package source;
@@ -97,6 +97,29 @@ public class Driver {
         }
     }
     
+    // overloaded method, intakes a bool to determine what to do
+    // true means filter higher stuff out
+    // false means filter lower stuff out
+    public static void courseQuery(String courseNum, ArrayList<Course> courseData, boolean higherOrLower) {
+    	int workNum;
+    	int courseInt = Integer.parseInt(courseNum);
+    	if (higherOrLower) { // smaller
+    		for (int i = 0; i < courseData.size(); i++) {
+            	workNum = Integer.parseInt(courseData.get(i).getCourseNum());
+            	if (workNum <= courseInt) {
+            		courseData.get(i).print();
+            	}
+            }
+    	} else { // larger
+    		for (int i = 0; i < courseData.size(); i++) {
+            	workNum = Integer.parseInt(courseData.get(i).getCourseNum());
+            	if (workNum >= courseInt) {
+            		courseData.get(i).print();
+            	}
+            }
+    	}
+    }
+    
     public static String chooseDepartment(Scanner sc) {
         System.out.println("Select a department: \n1. CSE\n2. STA\n3. ENG\n4. LMS");
         String option = "";
@@ -131,21 +154,38 @@ public class Driver {
      */
     public static void courseMenu(Scanner sc) {
         System.out.println("What would you like to do? \n1. Search by department"
-                + " AND course number\n2. Search by just department\n3. higher num"
-                + "\n4. lower num");
+                + " AND course number\n2. Filter by department\n3. Filter courses"
+                + " above a threshold\n4. Filter courses below a threshold");
         String option = "";
         option = sc.nextLine();
+        String department = "";
+        String courseNum = "";
+        switch (option) {
         // option 1, both department and number
-        if (option.equals("1")) {
-        	 String department = chooseDepartment(sc);
-             String courseNum = chooseNumber(sc);
-             courseQuery(department, courseNum, classData);
-        }
+        case "1":
+        	department = chooseDepartment(sc);
+            courseNum = chooseNumber(sc);
+            courseQuery(department, courseNum, classData);
+            break;
         // option 2, just department
-        if (option.equals("2")) {
-        	String department = chooseDepartment(sc);
+        case "2":
+        	department = chooseDepartment(sc);
         	courseQuery(department, classData);
-        	
+        	break;
+        // option 3, filter out higher course nums
+        case "3":
+        	courseNum = chooseNumber(sc);
+        	courseQuery(courseNum, classData, false);
+        	break;
+        // option 4, filter out lower course nums
+        case "4":
+        	courseNum = chooseNumber(sc);
+        	courseQuery(courseNum, classData, true);
+        	break;
+        // catch the user input error
+        default:
+        	System.out.println("Invalid input, returning to main menu!");
+        	break;
         }
     }
     
