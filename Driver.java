@@ -231,18 +231,31 @@ public class Driver {
      * @param sc
      */
     public static void profMenu(Scanner sc) {
-        System.out.println("Please type in the first and last name of a professor");
-        String professor = "";
-        professor = sc.nextLine();
-        if(profExists(professor)) {
-            System.out.println(professor + " teaches the following class(es)");
-            profQuery(professor);
-            
-        } else {
-            System.out.print("No such professor in the registry");
+        System.out.println("What would you like to do?\n1. Search professor to find what"
+        		+ " courses they teach\n2. Search professors teaching certain classes");
+        String option = "";
+        option = sc.nextLine();
+        switch (option) {
+        // option 1, search professor to find out what classes they teach
+        case "1":
+        	System.out.println("Please type in the name of a professor");
+        	String professor = "";
+            professor = sc.nextLine();
+        	if(profExists(professor)) {
+                System.out.println(professor + " teaches the following class(es)");
+                profQuery(professor);
+                
+            } else {
+                System.out.println("No such professor in the registry");
+            }
+        	break;
+        case "2":
+        	// add stuff here
+        	break;
+        default:
+        	// do nothing
+        	break;
         }
-        
-        
     }
     
     /**
