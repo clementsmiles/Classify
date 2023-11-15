@@ -62,6 +62,7 @@ public class Driver {
             Course c = new Course(lines[0], lines[1], p, lines[3]);
             classData.add(c);
             p.addCourse(c);
+            profData.add(p);
         }
     }
     
@@ -85,6 +86,19 @@ public class Driver {
            if (checkEquality(courseData.get(i), department, courseNum)) {
                courseData.get(i).print();
            }
+        }
+    }
+    
+
+    public static void profQuery(String profName) {
+        
+        
+        
+        for (int i = 0; i < profData.size(); i++) {
+            if (profName.equalsIgnoreCase(profData.get(i).getName())) {
+                profData.get(i).printCourse();
+                break;
+            }
         }
     }
     
@@ -209,6 +223,29 @@ public class Driver {
     }
     
     /**
+     * This method will allow the user to enter the name of a professor
+     * and then all the information about that professor will be returned.
+     * 
+     * INCOMPLETE (we have all the courses that the professors teach, but will
+     * later add the RateMyProfessor score and potentially other stuff)
+     * @param sc
+     */
+    public static void profMenu(Scanner sc) {
+        System.out.println("Please type in the first and last name of a professor");
+        String professor = "";
+        professor = sc.nextLine();
+        if(profExists(professor)) {
+            System.out.println(professor + " teaches the following class(es)");
+            profQuery(professor);
+            
+        } else {
+            System.out.print("No such professor in the registry");
+        }
+        
+        
+    }
+    
+    /**
      * This method should show the first menu allowing the user
      * to select the mode they'd like to search in. (Classes/Professor).
      * Copyright 2023 Insert Names Here
@@ -221,6 +258,9 @@ public class Driver {
         switch (option) {
         case "1":
             courseMenu(sc);
+            break;
+        case "2":
+            profMenu(sc);
             break;
         default:
             System.out.println("Invalid input: " + option);

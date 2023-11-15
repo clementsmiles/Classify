@@ -23,4 +23,13 @@ public class Professor {
     public void addCourse(Course c) {
         courses.add(c);
     }
+    
+    public void printCourse() {
+        
+    for(int i = 0; i < courses.size(); i++) {
+       this.courses.get(i).profDataPrint();
+    }
+    
+        
+    }
 }
