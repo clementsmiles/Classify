@@ -88,6 +88,15 @@ public class Driver {
         }
     }
     
+    // overloaded method to do the same with no course num
+    public static void courseQuery(String department, ArrayList<Course> courseData) {
+        for (int i = 0; i < courseData.size(); i++) {
+           if (courseData.get(i).getDepartment().equals(department)) {
+        	   courseData.get(i).print();
+           }
+        }
+    }
+    
     public static String chooseDepartment(Scanner sc) {
         System.out.println("Select a department: \n1. CSE\n2. STA\n3. ENG\n4. LMS");
         String option = "";
@@ -122,13 +131,22 @@ public class Driver {
      */
     public static void courseMenu(Scanner sc) {
         System.out.println("What would you like to do? \n1. Search by department"
-                + " and course number");
+                + " AND course number\n2. Search by just department\n3. higher num"
+                + "\n4. lower num");
         String option = "";
         option = sc.nextLine();
-        // Since there's only one option here right now im not gonna bother checking
-        String department = chooseDepartment(sc);
-        String courseNum = chooseNumber(sc);
-        courseQuery(department, courseNum, classData);
+        // option 1, both department and number
+        if (option.equals("1")) {
+        	 String department = chooseDepartment(sc);
+             String courseNum = chooseNumber(sc);
+             courseQuery(department, courseNum, classData);
+        }
+        // option 2, just department
+        if (option.equals("2")) {
+        	String department = chooseDepartment(sc);
+        	courseQuery(department, classData);
+        	
+        }
     }
     
     /**
