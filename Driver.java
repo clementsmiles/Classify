@@ -120,6 +120,16 @@ public class Driver {
     	}
     }
     
+    // will return true if the number is valid, false if its not
+    public static boolean numIsValid(String num) {
+    	try {
+    		Integer.parseInt(num);
+    		return true;
+    	} catch (Exception e) {
+    		return false;
+    	}
+    }
+    
     public static String chooseDepartment(Scanner sc) {
         System.out.println("Select a department: \n1. CSE\n2. STA\n3. ENG\n4. LMS");
         String option = "";
@@ -155,7 +165,8 @@ public class Driver {
     public static void courseMenu(Scanner sc) {
         System.out.println("What would you like to do? \n1. Search by department"
                 + " AND course number\n2. Filter by department\n3. Filter courses"
-                + " above a threshold\n4. Filter courses below a threshold");
+                + " above a threshold (inclusive)\n4. Filter courses below a"
+                + " threshold (inclusive)");
         String option = "";
         option = sc.nextLine();
         String department = "";
@@ -175,12 +186,20 @@ public class Driver {
         // option 3, filter out higher course nums
         case "3":
         	courseNum = chooseNumber(sc);
-        	courseQuery(courseNum, classData, false);
+        	if (numIsValid(courseNum)) {
+        		courseQuery(courseNum, classData, false);
+        	} else {
+        		System.out.println("Invalid input, returning to main menu!");
+        	}
         	break;
         // option 4, filter out lower course nums
         case "4":
         	courseNum = chooseNumber(sc);
-        	courseQuery(courseNum, classData, true);
+        	if (numIsValid(courseNum)) {
+        		courseQuery(courseNum, classData, true);
+        	} else {
+        		System.out.println("Invalid input, returning to main menu!");
+        	}
         	break;
         // catch the user input error
         default:
@@ -195,7 +214,7 @@ public class Driver {
      * Copyright 2023 Insert Names Here
      */
     public static boolean modeMenu(Scanner sc) {
-        System.out.println("Welcome to Classify! DISCLAIMER: This is a command line version of the planned GUI. The data used in this demo may not be accurate to the actual 2024 Spring schedule. \nPlease select an option: \n1. Search for Courses\n 2. Search for Professors");
+        System.out.println("Welcome to Classify! DISCLAIMER: This is a command line version of the planned GUI. The data used in this demo may not be accurate to the actual 2024 Spring schedule. \nPlease select an option: \n1. Search for Courses\n2. Search for Professors");
         String option = "0";
         option = sc.nextLine();
         System.out.println("You have selected: " + option);
