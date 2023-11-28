@@ -1,0 +1,114 @@
+
+/* generics */ 
+
+
+header{
+    background-color:#C3142D;
+    text-align: center;
+    margin: 30px;
+    padding: 10px;
+    border: solid 3px black;
+    height: 100px;
+}
+
+body{
+    background-color: rgb(242, 235, 235);
+    border: solid 5px #C3142D;
+    padding: 25px;
+}
+footer{
+
+}
+
+h1{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 5px;
+    size: 300px;
+    font-size: 100px;
+}
+
+h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 5px;
+    size: 200px;
+    font-size: 50px;
+}
+
+h3{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 5px;
+    size: 100px;
+    font-size: 40px;
+}
+h4{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 5px;
+    size: 100px;
+    font-size: 30px;
+}
+
+p{
+    color: rgb(22, 20, 17);
+    font-size: 25px;
+}
+
+a{
+
+}
+/* classes */
+
+.search{
+    display: flex;
+    gap: 5em;
+    margin: 10em;
+}
+.course{
+    flex: 50%;
+    border: solid red;
+    padding: 5px;
+    text-align: center;
+}
+.prof{
+    flex: 50%;
+    border: solid red;
+    padding: 5px;
+    text-align: center;
+}
+
+
+.search input[type=text]{
+    font-size: 25px;
+    margin: .5em;
+}
+
+.info{
+    display: flex;
+    gap: 3px;
+    border: solid red;
+    padding: 3px;
+}
+
+.item{
+    flex: 1;
+    border: solid red;
+    padding: 5px;
+    text-align: center;
+}
+
+/*ID'd items*/
+#title{
+    margin: auto;
+    font-size: 75px;
+    text-align: center;
+    color: rgb(252, 241, 241);
+}
+
+#suggestions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid black;
+    position: relative;
+    z-index: 1000;
+    
+}
