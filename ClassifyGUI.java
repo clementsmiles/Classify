@@ -120,6 +120,18 @@ public class ClassifyGUI extends Application {
         return FXCollections.observableArrayList(depList);
     }
     
+    /**
+     * Gets an ObservalbleList of strings containing all professors
+     * @return List of all professors
+     */
+    public ObservableList<String> getAllProfessors() {
+        HashSet<String> profList = new HashSet<String>();
+        for (int i = 0; i  < profData.size(); i++) {
+            profList.add(profData.get(i).getName());
+        }
+        return FXCollections.observableArrayList(profList);
+    }
+    
     // End backend methods
     
     
@@ -151,6 +163,7 @@ public class ClassifyGUI extends Application {
     }
     
     
+    
 
     // Start GUI/FX methods
     
@@ -176,20 +189,48 @@ public class ClassifyGUI extends Application {
         searchStage.show();
     }
     
+    //incomplete as of 11/30/2023
+    private void showProfessorNameSearchWindow() {
+        Stage profSearchStage = new Stage();
+        profSearchStage.setTitle("Search a professor by their name");
+        ObservableList<String> professors = getAllProfessors();
+        ComboBox<String> professorBox = new ComboBox<>(professors);
+        Label professorLabel = new Label("Professor");
+        Button resultButton = new Button("Search!");
+        TextArea resultsArea = new TextArea();
+        resultsArea.setEditable(false);
+        resultsArea.setWrapText(true);
+        
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setPadding(new Insets(10));
+        root.getChildren().addAll(professorLabel, professorBox, resultButton, resultsArea);
+          //resultButton.setOnAction(e -> resultsArea.setText());
+        Scene scene = new Scene(root, 800, 500);
+        profSearchStage.setScene(scene);
+        profSearchStage.show();
+    }
+    
     @Override
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
+        Label titleLabel = new Label("Classify");
         Button coursesButton = new Button("Courses");
         Button professorsButton = new Button("Professors");
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(10, 10, 10, 10));
         gridPane.setVgap(10);
         gridPane.setHgap(10);
-        gridPane.add(coursesButton, 0, 0);
-        gridPane.add(professorsButton, 1, 0);
+        gridPane.add (titleLabel, 0, 0);
+        gridPane.add(coursesButton, 0, 1);
+        gridPane.add(professorsButton, 1, 1);
+        gridPane.setColumnSpan(titleLabel, 2);
         coursesButton.setOnAction(e -> showCoursesWindow());
         professorsButton.setOnAction(e -> showProfessorsWindow());
-        Scene scene = new Scene(gridPane, 200, 100);
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(10,10, 10, 10));
+        vbox.getChildren().add(gridPane);
+        Scene scene = new Scene(vbox, 200, 100);
         mainStage.setScene(scene);
         mainStage.show();
     }
@@ -229,6 +270,7 @@ public class ClassifyGUI extends Application {
         professorsGridPane.add(searchByNameButton, 0, 0);
         professorsGridPane.add(searchByClassButton, 0, 1);
         Scene scene = new Scene(professorsGridPane, 400, 200);
+        searchByNameButton.setOnAction(e -> showProfessorNameSearchWindow());
         professorsStage.setScene(scene);
         professorsStage.show();
     }
