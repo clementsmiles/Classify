@@ -176,6 +176,28 @@ public class ClassifyGUI extends Application {
         searchStage.show();
     }
     
+    private void jake() {
+        Stage searchStage = new Stage();
+        searchStage.setTitle("Search by department and number");
+        ObservableList<String> departments = getAllDepartments();
+        ComboBox<String> departmentBox = new ComboBox<>(departments);
+        TextField numField = new TextField();
+        Label depLabel = new Label("Department");
+        Label numLabel = new Label("Course Number");
+        Button resultButton = new Button("Search!");
+        TextArea resultsArea = new TextArea();
+        resultsArea.setEditable(false);
+        resultsArea.setWrapText(true);
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setPadding(new Insets(10));
+        root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton);
+        resultButton.setOnAction(e -> resultsArea.setText(courseQuery(departmentBox.getValue(), numField.getText())));
+        Scene scene = new Scene(root, 800, 500);
+        searchStage.setScene(scene);
+        searchStage.show();
+    }
+    
     @Override
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
@@ -212,6 +234,7 @@ public class ClassifyGUI extends Application {
         coursesGridPane.add(filterBelowThresholdButton, 0, 3);
         coursesGridPane.add(addToBlacklistButton, 0, 4);
         searchButton.setOnAction(e -> showSearchDandNumWindow());
+        filterByDepartmentButton.setOnAction(e -> showSearchDandNumWindow());
         Scene scene = new Scene(coursesGridPane, 400, 300);
         coursesStage.setScene(scene);
         coursesStage.show();
