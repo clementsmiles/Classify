@@ -63,18 +63,24 @@ public class ClassifyGUI extends Application {
     
     public static String parseProfessorName(String name) {
         String parsedName = "";
-        if (name.substring(0, 1).equals("\"")) {
-            name = name.substring(1);
-            for (int i = name.indexOf(",") + 1; i != name.indexOf(",") - 1; i++) {
-                if (name.substring(i, i+1).equals(";") || name.substring(i, i+1).equals("\"")) {
-                    i = 0;
-                }
-                parsedName += name.substring(i);
-            }
-        } else {
-            return name;
+        if (name.contains(";")) {
+            name = name.substring(0, name.indexOf(";"));
         }
-        return parsedName;
+        if (name.substring(0, 1).equals("\"")) {
+            name = name.substring(1, name.length());
+            for (int i = name.indexOf(" ") + 1; true; i++) {
+                if (i == name.length() || name.substring(i, i+1).equals("\"")) {
+                    i = 0;
+                    parsedName += " ";
+                }
+                parsedName += name.charAt(i);
+                if (i == name.indexOf(" ")) {
+                    break;
+                }
+            }
+            return parsedName;
+        }
+        return name;
     }
     
     public static String[] correctLine(String[] values) {
@@ -90,15 +96,15 @@ public class ClassifyGUI extends Application {
         String line;
         while ((line = br.readLine()) != null) {
             String[] lines = line.split(",");
-//            if (lines.length == 10) {
-//                lines = correctLine(lines);
-//            }
+            if (lines.length == 10) {
+                lines = correctLine(lines);
+            }
             Professor p;
-            //String profName = parseProfessorName(lines[8]);
-            if (profExists(lines[8])) {
-                p = getProfByName(lines[8]);
+            String profName = parseProfessorName(lines[8]);
+            if (profExists(profName)) {
+                p = getProfByName(profName);
             } else {
-                p = new Professor(lines[8], new ArrayList<Course>());
+                p = new Professor(profName, new ArrayList<Course>());
             }
             Course c = new Course(lines[0], lines[1], lines[2], lines[3],
                     lines[4], lines[5], lines[6], lines[7], p);
