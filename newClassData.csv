@@ -1,0 +1,305 @@
+CRN,Subject,Number,Section,Title,Meeting Days,Meeting Times,Meeting Locations,Instructors
+14181,CSE,148,  A,Business Computing,MW,8:30am-9:50am,BEN 024, Steven Harvey;  Rebecca Cruez
+17114,CSE,148,  B,Business Computing,MW,10:05am-11:25am,BEN 024, Steven Harvey;  Rebecca Cruez
+14183,CSE,148,  C,Business Computing,MW,11:40am-1:00pm,BEN 024, Lane Mayer;  Rebecca Cruez
+14185,CSE,148,  D,Business Computing,MW,1:15pm-2:35pm,BEN 024, Steven Harvey;  Rebecca Cruez
+14186,CSE,148,  E,Business Computing,MW,2:50pm-4:10pm,BEN 024, Steven Harvey;  Rebecca Cruez
+14187,CSE,148,  F,Business Computing,MW,4:25pm-5:45pm,BEN 024,"Kellogg, Joanna;  Rebecca Cruez"
+15641,CSE,148,  H,Business Computing,MW,8:30am-9:50am,BEN 001,"Maduro, Ricardo;  Rebecca Cruez"
+14191,CSE,148,  I,Business Computing,MW,10:05am-11:25am,BEN 001, Jerry Cruez;  Rebecca Cruez
+14192,CSE,148,  J,Business Computing,MW,11:40am-1:00pm,BEN 001, Jerry Cruez;  Rebecca Cruez
+14194,CSE,148,  K,Business Computing,MW,1:15pm-2:35pm,BEN 001, Lane Mayer;  Rebecca Cruez
+14195,CSE,148,  L,Business Computing,MW,2:50pm-4:10pm,BEN 001, Jerry Cruez;  Rebecca Cruez
+14196,CSE,148,  M,Business Computing,MW,4:25pm-5:45pm,BEN 001, Jerry Cruez;  Rebecca Cruez
+15642,CSE,148,  N,Business Computing,MW,6:30pm-7:50pm,BEN 001,"Rigling, Victoria;  Rebecca Cruez"
+14213,CSE,148, AA,Business Computing,TR,8:30am-9:50am,BEN 024,Mr. Jeffrey Toaddy;  Rebecca Cruez
+14214,CSE,148, BB,Business Computing,TR,10:05am-11:25am,BEN 024, Erikamarie Wick;  Rebecca Cruez
+14215,CSE,148, CC,Business Computing,TR,11:40am-1:00pm,BEN 024, Erikamarie Wick;  Rebecca Cruez
+14216,CSE,148, DD,Business Computing,TR,1:15pm-2:35pm,BEN 024, Gus Coliadis;  Rebecca Cruez
+17115,CSE,148, EE,Business Computing,TR,2:50pm-4:10pm,BEN 024, Erikamarie Wick;  Rebecca Cruez
+14217,CSE,148, FF,Business Computing,TR,4:25pm-5:45pm,BEN 024, Erikamarie Wick;  Rebecca Cruez
+16408,CSE,148, HH,Business Computing,TR,8:30am-9:50am,BEN 001,"Foster, Drew;  Rebecca Cruez"
+16409,CSE,148, II,Business Computing,TR,10:05am-11:25am,BEN 001,"Foster, Drew;  Rebecca Cruez"
+14218,CSE,148, JJ,Business Computing,TR,11:40am-1:00pm,BEN 001,"Foster, Drew;  Rebecca Cruez"
+14219,CSE,148, KK,Business Computing,TR,1:15pm-2:35pm,BEN 001, Rebecca Cruez
+14220,CSE,148, LL,Business Computing,TR,2:50pm-4:10pm,BEN 001, Rebecca Cruez
+14221,CSE,148, MM,Business Computing,TR,4:25pm-5:45pm,BEN 001,"Jones, David;  Rebecca Cruez"
+17936,CSE,174,  B,Fundmntls-Progrming&Prob Solvg,MWF,10:05am-11:20am,DSB 385,Mr. Norm Krumpe
+12431,CSE,174,  C,Fundmntls-Progrming&Prob Solvg,TR,10:05am-11:55am,BEN 009,"Goodman, Garrett"
+12432,CSE,174,  D,Fundmntls-Progrming&Prob Solvg,TR,12:10pm-2:00pm,BEN 009,"Goodman, Garrett"
+12854,CSE,174,  E,Fundmntls-Progrming&Prob Solvg,TR,2:15pm-4:05pm,BEN 009,"Goodman, Garrett"
+13384,CSE,174,  F,Fundmntls-Progrming&Prob Solvg,TR,4:25pm-6:15pm,BEN 009,"Goodman, Garrett"
+17107,CSE,201,  A,Intro to Software Engineering,WF,11:40am-1:00pm,BEN 207,Dr. Samer Khamaiseh
+13685,CSE,201,  B,Intro to Software Engineering,WF,1:15pm-2:35pm,BEN 207,Dr. Samer Khamaiseh
+14545,CSE,201,  C,Intro to Software Engineering,TR,1:15pm-2:35pm,BEN 206, John Mattox
+16310,CSE,201,  D,Intro to Software Engineering,TR,2:50pm-4:10pm,BEN 206, John Mattox
+19356,CSE,202,  A,Software Requirements,TR,2:50pm-4:10pm,BEN 204,"Sobel, Ann"
+17108,CSE,212,  A,Software Engineering for UI/UX,TR,10:05am-11:25am,DSB 168,"Alomari, Hakam"
+12855,CSE,251,  A,Intro to Game Programming,MW,5:00pm-6:20pm,BEN 009,"DeWitt, Christopher"
+19373,CSE,251,  B,Intro to Game Programming,MW,6:30pm-7:50pm,BEN 009,"DeWitt, Christopher"
+12433,CSE,252,  A,Web Application Programming,TR,6:00pm-7:20pm,BEN 006,Staff
+17109,CSE,262,  A,"Tech, Ethics & Global Society",TR,8:30am-9:50am,BEN 213, Kaylynn Borror
+12856,CSE,262,  B,"Tech, Ethics & Global Society",MW,8:30am-9:50am,BEN 206, Kaylynn Borror
+13505,CSE,262,  C,"Tech, Ethics & Global Society",MW,10:05am-11:25am,BEN 206, Kaylynn Borror
+12434,CSE,271,  A,Object-Oriented Programming,MW|R,8:30am-9:25am|8:00am-9:50am,MCG 415|BEN 010, Asaad Althoubi
+12435,CSE,271,  B,Object-Oriented Programming,MW|F,8:30am-9:50am|8:00am-9:50am,MCG 415|BEN 001, Asaad Althoubi
+12436,CSE,271,  C,Object-Oriented Programming,MW|R,10:05am-11:00am|10:05am-11:55am,BEN 102|BEN 002, Asaad Althoubi
+12437,CSE,271,  D,Object-Oriented Programming,MW|F,10:05am-11:00am|10:05am-11:55am,BEN 102|BEN 001, Asaad Althoubi
+12857,CSE,271,  E,Object-Oriented Programming,MW|F,2:50pm-3:45pm|2:15pm-4:05pm,DSB 385|DSB 385,Mr. Norm Krumpe
+13385,CSE,271,  F,Object-Oriented Programming,TR,10:05am-11:55am,BEN 010,Dr. DJ Rao
+17110,CSE,271,  H,Object-Oriented Programming,TR,2:15pm-4:05pm,BEN 010,Dr. DJ Rao
+19357,CSE,273,  A,Optimization Modeling,TR,2:50pm-4:10pm,DSB 168,Dr. Zulal Sevkli
+12438,CSE,274,  A,Data Abstractions & Structures,T|R,10:05am-11:25am|10:05am-11:25am,DSB 166|BEN 006,Dr. Behrouz Zolfaghari
+12858,CSE,274,  B,Data Abstractions & Structures,T|R,1:15pm-2:35pm|1:15pm-2:35pm,DSB 166|BEN 006,Dr. Behrouz Zolfaghari
+13686,CSE,274,  C,Data Abstractions & Structures,T|R,2:50pm-4:10pm|2:50pm-4:10pm,DSB 166|BEN 006,Dr. Behrouz Zolfaghari
+14222,CSE,274,  D,Data Abstractions & Structures,WF,11:40am-1:00pm,BEN 006,Dr. Cynthia Johnson
+12439,CSE,278,  A,Systems I,M|F,10:05am-11:55am|10:05am-11:55am,DSB 168|BEN 024,"Feng, Xianglong"
+13496,CSE,278,  C,Systems I,R|T,10:05am-11:55am|10:05am-11:55am,DSB 166|BEN 006,Dr. Zulal Sevkli
+17111,CSE,278,  D,Systems I,R|T,12:10pm-2:00pm|12:10pm-2:00pm,DSB 166|BEN 006,Dr. Zulal Sevkli
+19358,CSE,301,  A,Software Architecture & Design,WF,1:15pm-2:35pm,BEN 204,Dr. Cynthia Johnson
+19359,CSE,301,  B,Software Architecture & Design,WF,2:50pm-4:10pm,BEN 204,Dr. Cynthia Johnson
+19360,CSE,302,  A,Software Construction,TR,11:40am-1:00pm,DSB 168,"Alomari, Hakam"
+19618,CSE,309,  A,Leading In Project Management,TR,1:15pm-2:35pm,BEN 204,"Sobel, Ann"
+15632,CSE,374,  A,Algorithms I,TR,10:05am-11:25am,BEN 204,Dr. Vaskar Raychoudhury
+17112,CSE,374,  B,Algorithms I,WF,10:05am-11:25am,BEN 204,"Giabbanelli, Philippe"
+15633,CSE,374,  C,Algorithms I,WF,1:15pm-2:35pm,BEN 213,"Giabbanelli, Philippe"
+19363,CSE,374,  D,Algorithms I,WF,2:50pm-4:10pm,BEN 207,"Giabbanelli, Philippe"
+14223,CSE,381,  A,Systems 2,W|M,10:05am-11:55am|10:05am-11:55am,DSB 168|BEN 009,Dr. Alan Ferrenberg
+14224,CSE,381,  B,Systems 2,W|M,12:10pm-2:00pm|12:10pm-2:00pm,DSB 168|BEN 009,Dr. Alan Ferrenberg
+14873,CSE,381,  C,Systems 2,R|T,2:15pm-4:05pm|2:15pm-4:05pm,DSB 166|BEN 006,Dr. Alan Ferrenberg
+14704,CSE,383,  A,Web Application Programming,F|W,10:05am-11:25am|10:05am-11:25am,DSB 166|BEN 009,"Johnson, Kurt"
+14874,CSE,383,  B,Web Application Programming,F|W,11:40am-1:00pm|11:40am-1:00pm,DSB 166|BEN 009,"Johnson, Kurt"
+14875,CSE,383,  C,Web Application Programming,F|W,1:15pm-2:35pm|1:15pm-2:35pm,DSB 166|BEN 009,"Johnson, Kurt"
+16316,CSE,385,  A,Database Systems,TR,8:30am-9:50am,BEN 206, John Mattox
+13687,CSE,385,  B,Database Systems,TR,10:05am-11:25am,BEN 206, John Mattox
+15634,CSE,386,  A,Foundations of Graphics,TR,1:15pm-2:35pm,DSB 385,"Zmuda, Michael"
+17113,CSE,386,  B,Foundations of Graphics,TR,2:50pm-4:10pm,DSB 385,"Zmuda, Michael"
+16331,CSE,389,  A,Game Design and Implementation,TR,10:05am-11:25am,DSB 385, Kaylynn Borror
+18412,ENG,105,  A,Writing Studio,,,WEB ,Dr. Tony Cimasko
+18431,ENG,105,  B,Writing Studio,,,WEB ,Dr. Tony Cimasko
+19727,ENG,105,  C,Writing Studio,,,WEB ,Staff
+15624,ENG,107,  A,Reading Writing Acad Contexts,MWF,11:40am-1:00pm,BAC 154,Staff
+13773,ENG,108,  A,U.S. Cult & Comp L2 Writers,MWF,8:30am-9:45am,BAC 151,Staff
+13772,ENG,108,  B,U.S. Cult & Comp L2 Writers,MWF,11:40am-1:00pm,BAC 151,Dr. Tony Cimasko
+12680,ENG,109,  A,Composition & Rhet L2 Writers,MWF,8:30am-9:45am,BAC 250,Staff
+13700,ENG,111, AA,Composition and Rhetoric,MW,8:30am-9:50am,BAC 143,Staff
+13693,ENG,111, AB,Composition and Rhetoric,MW,8:30am-9:50am,BAC 264,Staff
+15802,ENG,111, AC,Composition and Rhetoric,MW,8:30am-9:50am,UPH 167,Staff
+14001,ENG,111, AD,Composition and Rhetoric,TR,8:30am-9:50am,BAC 143,Staff
+13723,ENG,111, AE,Composition and Rhetoric,TR,8:30am-9:50am,BAC 254,Staff
+16763,ENG,111, AF,Composition and Rhetoric,TR,8:30am-9:50am,BOY 132,Staff
+17226,ENG,111, AG,Composition and Rhetoric,MW,8:30am-9:50am,UPH 258,Staff
+17227,ENG,111, AH,Composition and Rhetoric,WF,8:30am-9:50am,BOY 132,Staff
+13694,ENG,111, BA,Composition and Rhetoric,MW,10:05am-11:25am,SHD 009,Staff
+15803,ENG,111, BB,Composition and Rhetoric,MW,10:05am-11:25am,BAC 256,Staff
+17228,ENG,111, BC,Composition and Rhetoric,MW,10:05am-11:25am,UPH 167,Staff
+13726,ENG,111, BD,Composition and Rhetoric,TR,10:05am-11:25am,BAC 254,Staff
+16292,ENG,111, BE,Composition and Rhetoric,TR,10:05am-11:25am,BOY 132,Staff
+14845,ENG,111, BF,Composition and Rhetoric,TR,10:05am-11:25am,UPH 258,Staff
+14985,ENG,111, BG,Composition and Rhetoric,WF,10:05am-11:25am,ART 103,Staff
+13207,ENG,111, BH,Composition and Rhetoric,WF,10:05am-11:25am,BAC 108,Staff
+13721,ENG,111, BI,Composition and Rhetoric,WF,10:05am-11:25am,LWS 304,Staff
+13722,ENG,111, EA,Composition and Rhetoric,MW,11:40am-1:00pm,BAC 143,Staff
+13702,ENG,111, EB,Composition and Rhetoric,MW,11:40am-1:00pm,BAC 256,Staff
+15804,ENG,111, EC,Composition and Rhetoric,MW,11:40am-1:00pm,LWS 304,Staff
+13724,ENG,111, ED,Composition and Rhetoric,TR,11:40am-1:00pm,UPH 167,Staff
+13698,ENG,111, EE,Composition and Rhetoric,TR,11:40am-1:00pm,BAC 254, Jen Sammons
+13699,ENG,111, EF,Composition and Rhetoric,TR,11:40am-1:00pm,BAC 143,Staff
+13697,ENG,111, EG,Composition and Rhetoric,TR,11:40am-1:00pm,IRV 124,Staff
+15809,ENG,111, EH,Composition and Rhetoric,TR,11:40am-1:00pm,UPH 364,Staff
+14272,ENG,111, EI,Composition and Rhetoric,WF,11:40am-1:00pm,BAC 045,Staff
+15806,ENG,111, EJ,Composition and Rhetoric,WF,11:40am-1:00pm,IRV 242,Staff
+15805,ENG,111, JA,Composition and Rhetoric,MW,1:15pm-2:35pm,UPH 226,Staff
+15810,ENG,111, JB,Composition and Rhetoric,MW,1:15pm-2:35pm,BAC 250,Staff
+15807,ENG,111, JC,Composition and Rhetoric,MW,1:15pm-2:35pm,BAC 256,Staff
+13696,ENG,111, JD,Composition and Rhetoric,MW,1:15pm-2:35pm,UPH 167,Staff
+14984,ENG,111, JE,Composition and Rhetoric,MW,1:15pm-2:35pm,BOY 132,Staff
+13701,ENG,111, JF,Composition and Rhetoric,TR,1:15pm-2:35pm,BAC 254,Staff
+16983,ENG,111, JG,Composition and Rhetoric,TR,1:15pm-2:35pm,UPH 258,Staff
+17230,ENG,111, JH,Composition and Rhetoric,TR,1:15pm-2:35pm,BAC 256,Staff
+13704,ENG,111, NA,Composition and Rhetoric,MW,2:50pm-4:10pm,BOY 132,Staff
+17231,ENG,111, NB,Composition and Rhetoric,MW,2:50pm-4:10pm,BAC 256,Staff
+15808,ENG,111, NC,Composition and Rhetoric,MW,2:50pm-4:10pm,BAC 143,Staff
+15811,ENG,111, ND,Composition and Rhetoric,MW,2:50pm-4:10pm,BAC 250,Staff
+13703,ENG,111, NE,Composition and Rhetoric,MW,2:50pm-4:10pm,BAC 264,Staff
+14844,ENG,111, NF,Composition and Rhetoric,TR,2:50pm-4:10pm,HIS 200,Staff
+17232,ENG,111, NG,Composition and Rhetoric,TR,2:50pm-4:10pm,BAC 254, Jen Sammons
+16395,ENG,111, NH,Composition and Rhetoric,TR,2:50pm-4:10pm,BAC 108,Staff
+16396,ENG,111, PA,Composition and Rhetoric,MW,4:25pm-5:45pm,BAC 131,Staff
+16984,ENG,111, PB,Composition and Rhetoric,MW,4:25pm-5:45pm,BAC 143,Staff
+16985,ENG,111, PC,Composition and Rhetoric,TR,4:25pm-5:45pm,BAC 250,Staff
+17822,ENG,119,  A,ENG for Int'l Grad Students,MW,10:05am-11:25am,BAC 154,Dr. Tony Cimasko
+17821,ENG,123,  A,Introduction To Poetry,MW,10:05am-11:25am,UPH 361,Ms. Cathy Wagner
+16986,ENG,134,  A,Introduction To Shakespeare,MW,2:50pm-4:10pm,UPH 262,Ms. Lauren Van Atta
+14477,ENG,171,  A,Humanities and Technology,MW,11:40am-1:00pm,BAC 250,Dr. Tim Lockridge
+13149,ENG,213,  B,Writing for Film and TV,TR,11:40am-1:00pm,WIH 160,"Tchernev, John"
+18693,ENG,220A,  A,"Lit & Film: Classics, Indies",TR,11:40am-1:00pm,KRG 319,Dr. Katie Johnson
+16995,ENG,222,  A,Rhetoric of Info & Data Visual,TR,1:15pm-2:35pm,WEB ,"Porter, James"
+12161,ENG,224,  A,Prof Com & Digital Rhetoric,MW,10:05am-11:25am,BAC 264,Dr. Adam Strantz
+13706,ENG,224,  B,Prof Com & Digital Rhetoric,MW,11:40am-1:00pm,BAC 252,Dr. Adam Strantz
+13495,ENG,224,  C,Prof Com & Digital Rhetoric,TR,10:05am-11:25am,BAC 264,Ms. Emma Boddy
+14005,ENG,225,  A,Advanced Composition,TR,8:30am-9:50am,BAC 250,"Bechtel, Gabriele"
+14006,ENG,225,  B,Advanced Composition,MW,10:05am-11:25am,BOY 132,"Bromley, James"
+17850,ENG,225,  C,Advanced Composition,TR,10:05am-11:25am,BAC 250,"Bechtel, Gabriele"
+14156,ENG,225,  D,Advanced Composition,TR,10:05am-11:25am,BAC 138,"Peterson, Kaara"
+13709,ENG,225,  E,Advanced Composition,TR,11:40am-1:00pm,BAC 250,"Peterson, Kaara"
+18202,ENG,225,  F,Advanced Composition,MW,11:40am-1:00pm,BOY 132,"Bromley, James"
+13708,ENG,225,  G,Advanced Composition,MW,1:15pm-2:35pm,IRV 242,Staff
+14067,ENG,225,  H,Advanced Composition,MW,2:50pm-4:10pm,UPH 258,Staff
+10115,ENG,226,  A,Intro to Creative Writing,WF,8:30am-9:50am,UPH 226,Staff
+10113,ENG,226,  B,Intro to Creative Writing,TR,8:30am-9:50am,UPH 226,Staff
+13786,ENG,226,  C,Intro to Creative Writing,MW,10:05am-11:25am,BAC 143, Emily Spencer
+10116,ENG,226,  D,Intro to Creative Writing,TR,10:05am-11:25am,BAC 143,Staff
+10114,ENG,226,  E,Intro to Creative Writing,WF,10:05am-11:25am,UPH 258,Staff
+13785,ENG,226,  F,Intro to Creative Writing,MW,11:40am-1:00pm,UPH 258,Staff
+15055,ENG,226,  G,Intro to Creative Writing,TR,11:40am-1:00pm,UPH 258,Staff
+10112,ENG,226,  H,Intro to Creative Writing,WF,11:40am-1:00pm,UPH 163,Staff
+15054,ENG,226,  I,Intro to Creative Writing,TR,1:15pm-2:35pm,UPH 226,Staff
+16305,ENG,226,  J,Intro to Creative Writing,TR,1:15pm-2:35pm,UPH 163,Staff
+17373,ENG,226,  K,Intro to Creative Writing,MW,2:50pm-4:10pm,UPH 226,Staff
+17258,ENG,226,  L,Intro to Creative Writing,TR,2:50pm-4:10pm,UPH 226,Staff
+17259,ENG,226,  M,Intro to Creative Writing,TR,2:50pm-4:10pm,UPH 258,Staff
+18612,ENG,232,  A,Women Writers,TR,11:40am-1:00pm,BAC 108,"Edwards, Erin"
+18614,ENG,236,  A,Experimental Film,TR,2:50pm-4:10pm,UPH 262,"Edwards, Erin"
+18615,ENG,237,  A,GLBTQ Literature,MW,1:15pm-2:35pm,BAC 346,"Detloff, Madelyn"
+17733,ENG,249,  A,Asian & Asian American Cinema,MW,11:40am-1:00pm,BAC 346,"Jayasena, Nalin Asoka"
+18678,ENG,256,  A,Empire and Utopia,TR,11:40am-1:00pm,IRV 242,"Sutcliffe, Benjamin"
+16977,ENG,263,  A,Literature and Medicine,TR,10:05am-11:25am,UPH 364,"Klestinec, Cynthia"
+19080,ENG,263H,  A,Literature and Medicine,TR,10:05am-11:25am,UPH 364,"Klestinec, Cynthia"
+18798,ENG,264,  A,Environmental Literature,TR,11:40am-1:00pm,UPH 262,"Navakas, Michele"
+19081,ENG,264H,  A,Environmental Literature,TR,11:40am-1:00pm,UPH 262,"Navakas, Michele"
+16978,ENG,275,  A,American Lit to 1900,MW,1:15pm-2:35pm,UPH 127,"Hebard, Andrew"
+18616,ENG,276,  A,American Literature after 1900,MW,11:40am-1:00pm,IRV 142,"Melley, Timothy"
+16382,ENG,285,  A,Prof Comm for Data Analytics,TR,10:05am-11:25am,IRV 142,"Evans, Theresa"
+16981,ENG,285,  B,Prof Comm for Data Analytics,TR,11:40am-1:00pm,IRV 224,"Evans, Theresa"
+10117,ENG,298,  A,Intro:Literary&Cultural Study,MW,10:05am-11:25am,UPH 226,"Hebard, Andrew"
+12363,ENG,298,  B,Intro:Literary&Cultural Study,TR,2:50pm-4:10pm,BAC 131,Dr. Katie Johnson
+11147,ENG,304,  A,Bckgrnds Comp Theory & Resrch,TR,1:15pm-2:35pm,BAC 108,Mr. Will Chesher
+13717,ENG,313,  A,Technical Writing,,,WEB ,"Singleton, Meredith"
+10118,ENG,313,  B,Technical Writing,,,WEB ,"Singleton, Meredith"
+13718,ENG,313,  C,Technical Writing,MW,4:25pm-5:45pm,BAC 264,"Stevens, Amanda"
+14841,ENG,313,  D,Technical Writing,TR,2:50pm-4:10pm,BAC 264,"Evans, Theresa"
+13067,ENG,313,  E,Technical Writing,MW,11:40am-1:00pm,BAC 138,"Stevens, Amanda"
+10663,ENG,313,  F,Technical Writing,,,WEB ,"Madani, Ana"
+10664,ENG,313,  G,Technical Writing,,,WEB ,"Madani, Ana"
+14938,ENG,313,  H,Technical Writing,,,WEB ,"Madani, Ana"
+19642,ENG,315,  A,Business Writing,TR,2:50pm-4:10pm,BAC 250,Ms. Rena Perez
+19386,ENG,316,  A,Legal Writing and Reasoning,MW,10:05am-11:25am,BAC 250,"McKee, Heidi"
+10119,ENG,320,  A,Intermed Creatve Wrtg:Fiction,TR,11:40am-1:00pm,BAC 131,"Bates, Joseph"
+10345,ENG,320,  B,Intermed Creatve Wrtg:Fiction,TR,1:15pm-2:35pm,BAC 131,"Roley, Brian"
+14497,ENG,321,  A,The Literary Marketplace,TR,2:50pm-4:10pm,BAC 346,"Bates, Joseph"
+18799,ENG,323,  A,Interm. Creative Nonfiction,TR,10:05am-11:25am,BAC 131, Jen Sammons
+18621,ENG,327,  A,Medieval Literature,TR,1:15pm-2:35pm,BAC 250,"Murphy, Patrick"
+15559,ENG,338,  A,African Amer Writing 1946-Pres,MW,11:40am-1:00pm,UPH 127,"Dunning, Stefanie"
+17309,ENG,383,  A,Brazilian Women in Lit & Film,TR,4:25pm-5:45pm,BAC 252,Staff
+18695,ENG,387,  A,Studies in Poetry,TR,1:15pm-2:35pm,BAC 346,"Tuma, Keith"
+16813,SLM,110A,  A,Beginning Ballet,MW,11:40am-12:35pm,PHI 115, Lana Kay Rosenberg
+16814,SLM,110A,  C,Beginning Ballet,TR,10:05am-11:00am,PHI 115, Lana Kay Rosenberg
+16815,SLM,110G,  A,Beginning Modern Dance,MW,10:05am-11:00am,PHI 115, Lana Kay Rosenberg
+18584,SLM,112,  A,Becoming a Champion 4 Life,M,7:30pm-8:25pm,PHI 116,Dr. Emily Cisek
+18585,SLM,112,  B,Becoming a Champion 4 Life,T,7:30pm-8:25pm,PHI 116,Dr. Emily Cisek
+17836,SLM,120C, QA,Individual Exercise,MW,11:40am-12:45pm,PHI 113,Staff
+16862,SLM,120C, QB,Individual Exercise,MW,4:25pm-5:30pm,PHI 113,Staff
+17837,SLM,120C, QC,Individual Exercise,TR,6:00pm-7:05pm,PHI 113,Staff
+16863,SLM,120C, QD,Individual Exercise,MW,1:15pm-2:20pm,PHI 113,Staff
+16864,SLM,120C, QE,Individual Exercise,MW,2:50pm-3:55pm,PHI 113,Staff
+17903,SLM,120C, QI,Individual Exercise,TR,4:25pm-5:30pm,PHI 113,Staff
+16865,SLM,120C, QJ,Individual Exercise,TR,2:50pm-3:55pm,PHI 113,Staff
+17305,SLM,120G, QA,Weight Training,MW,5:30pm-6:40pm,PHI 113,Staff
+17306,SLM,120G, QB,Weight Training,MW,6:45pm-7:55pm,PHI 113,Staff
+16866,SLM,120I, QA,Power Walking for Fitness,MW,1:15pm-2:20pm,PHI 033C,Staff
+16867,SLM,120I, QB,Power Walking for Fitness,MW,2:50pm-3:55pm,PHI 033C,Staff
+16868,SLM,120N, QA,Nature Fit,MW,1:15pm-2:20pm,PHI 033B,Staff
+16869,SLM,120N, QB,Nature Fit,MW,2:50pm-3:55pm,PHI 033B,Staff
+16954,SLM,130O,  A,Basic Ice Skating,MW,2:50pm-3:45pm,ICE 122, Zakareya Yousef
+16955,SLM,130O,  B,Basic Ice Skating,MW,4:25pm-5:20pm,ICE 122, Zakareya Yousef
+16959,SLM,130O,  C,Basic Ice Skating,TR,11:40am-12:35pm,ICE 122,"Goodman, David"
+16961,SLM,130O,  D,Basic Ice Skating,TR,1:15pm-2:10pm,ICE 122,"Goodman, David"
+16962,SLM,130O,  E,Basic Ice Skating,TR,2:50pm-3:45pm,ICE 122, Zakareya Yousef
+16870,SLM,140A, QA,Basketball,MW,2:50pm-3:55pm,PHI 033A,Staff
+16871,SLM,140A, QB,Basketball,MW,11:40am-12:45pm,PHI 033A,Staff
+16873,SLM,140A, QD,Basketball,TR,1:15pm-2:20pm,PHI 033A,Staff
+17904,SLM,140A, QE,Basketball,TR,2:50pm-3:55pm,PHI 033A,Staff
+16953,SLM,140H,  A,Ice Hockey,MW,1:15pm-2:10pm,ICE 122, Zach Sens
+16903,SLM,140M,  A,Broomball,MW,11:40am-12:35pm,ICE 106, Zakareya Yousef
+16904,SLM,140M,  B,Broomball,MW,1:15pm-2:10pm,ICE 106, Zakareya Yousef
+16956,SLM,140M,  C,Broomball,TR,11:40am-12:35pm,ICE 106, Zakareya Yousef
+16958,SLM,140M,  D,Broomball,TR,1:15pm-2:10pm,MCG 415, Zakareya Yousef
+16964,SLM,140M,  E,Broomball,MW,10:05am-11:10am,ICE 106, Zakareya Yousef
+16965,SLM,140M,  F,Broomball,TR,10:05am-11:10am,ICE 106, Zakareya Yousef
+16860,SLM,150A, UA,Beginning Canoeing,TR,11:40am-1:00pm,RSC 055,"Siliko, Jennifer"
+16861,SLM,150A, UB,Beginning Canoeing,TR,1:15pm-2:35pm,RSC 055,"Siliko, Jennifer"
+16856,SLM,150B, TA,Beginning Backpacking,M,12:10pm-2:00pm,RSC 055,"Siliko, Jennifer"
+16857,SLM,150B, TB,Beginning Backpacking,W,12:10pm-2:00pm,RSC 055,"Siliko, Jennifer"
+19657,SLM,150B, TC,Beginning Backpacking,M,10:05am-11:55am,RSC 055,"Troy, Elizabeth"
+19660,SLM,150B, UA,Beginning Backpacking,M,10:05am-11:55am,RSC 057,"Troy, Elizabeth"
+16852,SLM,150C, TA,Beginning Rock Climbing,TR,8:30am-9:50am,RSC 057,"Woods, Bridget"
+16853,SLM,150C, TB,Beginning Rock Climbing,TR,10:05am-11:25am,RSC 057,"Woods, Bridget"
+16854,SLM,150C, TC,Beginning Rock Climbing,TR,1:15pm-2:35pm,RSC 057,Mr. Bill Sparks
+16855,SLM,150C, TD,Beginning Rock Climbing,TR,11:40am-1:00pm,RSC 057,Mr. Bill Sparks
+16998,SLM,150E,  A,Beginning Horseback Riding,M,10:05am-11:55am,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+16999,SLM,150E,  B,Beginning Horseback Riding,M,2:15pm-4:05pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17000,SLM,150E,  C,Beginning Horseback Riding,M,4:25pm-6:15pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17001,SLM,150E,  D,Beginning Horseback Riding,T,10:05am-11:55am,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17002,SLM,150E,  E,Beginning Horseback Riding,T,12:10pm-2:00pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17003,SLM,150E,  F,Beginning Horseback Riding,W,2:15pm-4:05pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17004,SLM,150E,  G,Beginning Horseback Riding,W,4:25pm-6:15pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17005,SLM,150E,  H,Beginning Horseback Riding,R,10:05am-11:55am,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17006,SLM,150E,  I,Beginning Horseback Riding,R,2:15pm-4:05pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17007,SLM,150E,  J,Beginning Horseback Riding,R,4:25pm-6:15pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17008,SLM,150E,  K,Beginning Horseback Riding,F,10:05am-11:55am,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17010,SLM,150E,  L,Beginning Horseback Riding,F,12:10pm-2:00pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17011,SLM,150F,  A,Intermediate Horseback Riding,T,2:15pm-4:05pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17012,SLM,150F,  B,Intermediate Horseback Riding,F,2:15pm-4:05pm,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+17013,SLM,150H,  A,Advanced Horseback Riding,R,8:00am-9:50am,STB 101,"Ms. Tess Von Hemel; Frey, Beth; Wasser, Amanda"
+19658,SLM,150K, UA,Intermediate Rock Climbing,TR,10:05am-11:25am,RSC 057,"Woods, Bridget"
+19659,SLM,150K, UB,Intermediate Rock Climbing,TR,11:40am-1:00pm,RSC 057,"Woods, Bridget"
+16851,SLM,195,  A,Stress Management,MW,12:10pm-1:05pm,RSC 080,Staff
+16293,SLM,195,  B,Stress Management,MW,12:10pm-1:05pm,RSC 080,Staff
+16294,SLM,195,  C,Stress Management,TR,12:10pm-1:05pm,RSC 080,Staff
+16295,SLM,195,  D,Stress Management,TR,12:10pm-1:05pm,RSC 080,Staff
+16296,SLM,195,  E,Stress Management,TR,1:15pm-2:10pm,RSC 080,Staff
+16297,SLM,195,  F,Stress Management,TR,1:15pm-2:10pm,RSC 080,Staff
+17918,SLM,195,  I,Stress Management,TR,2:50pm-3:45pm,RSC 080,Staff
+17919,SLM,195,  J,Stress Management,TR,2:50pm-3:45pm,RSC 080,Staff
+18346,SLM,195, UA,Stress Management,|MW,|1:15pm-2:10pm,WEB |RSC 080,Staff
+18347,SLM,195, UB,Stress Management,|MW,|1:15pm-2:10pm,WEB |RSC 080,Staff
+16777,SLM,212,  A,Introduction Sport Management,MW,8:30am-9:50am,LWS 304, Rob Rude
+16778,SLM,212,  B,Introduction Sport Management,TR,10:05am-11:25am,MCG 222,"Dunwoody, Ruchelle"
+16779,SLM,225,  A,Ethics in Sport,TR,1:15pm-2:35pm,LWS 215,Dr. Sam Morris
+16780,SLM,225,  B,Ethics in Sport,TR,10:05am-11:25am,LWS 215,Dr. Sam Morris
+17751,SLM,225,  C,Ethics in Sport,TR,11:40am-1:00pm,LWS 215,Dr. Sam Morris
+18583,SLM,225,  D,Ethics in Sport,MW,11:40am-1:00pm,LWS 116, Rob Rude
+18262,SLM,246,  A,"Sport, Management, and Culture",|,|,WEB | ,"Beissel, Adam"
+19479,SLM,248,  A,Global Sport Perspectives,TR,10:05am-11:25am,KRG 319,"Beissel, Adam"
+18577,SLM,272,  A,Cont Persp in Sport Leadership,MW,2:50pm-4:10pm,PSN 116,Dr. Jordan Goffena
+16781,SLM,272,  B,Cont Persp in Sport Leadership,WF,10:05am-11:25am,MCG 222,Mr. Brendan Danker
+16784,SLM,275,  A,Principles of Sport Analytics,TR,1:15pm-2:35pm,MCG 322,Dr. Jerred Wang
+17205,SLM,276,  B,Current Issues inLeisure&Sport,TR,2:50pm-4:10pm,LWS 116,Dr. Bethany Geckle
+17206,SLM,276,  C,Current Issues inLeisure&Sport,,,WEB ,Dr. Bethany Geckle
+16720,SLM,279,  A,"Race, Nation, and Sport",WF,11:40am-1:00pm,MCG 217,Dr. Bethany Geckle
+18572,SLM,338,  A,Psychosocial Aspects Coaching,TR,10:05am-11:25am,LWS 116,"Vealey, Robin"
+16786,SLM,375,  B,Psych Persp. in Sport&Exerc.,WF,11:40am-1:00pm,MCG 222,Mr. Brendan Danker
+17604,SLM,375,  C,Psych Persp. in Sport&Exerc.,TR,1:15pm-2:35pm,MCG 222,Mr. Brendan Danker
+16787,SLM,378,  A,"Sport, Power and Inequality",MW,8:30am-9:50am,LWS 215,"Maddox, Callie"
+17965,SLM,378,  C,"Sport, Power and Inequality",MW,10:05am-11:25am,LWS 215,"Maddox, Callie"
+16373,STA,261,  A,Statistics,TR|F,8:30am-9:50am|8:30am-9:30am,UPH 314|UPH 314, Lizzy Compton
+16374,STA,261,  B,Statistics,TR|F,10:05am-11:25am|10:05am-11:05am,UPH 314|UPH 314, Lizzy Compton
+16375,STA,261,  C,Statistics,TR|,11:40am-1:00pm|,UPH 314|WEB ,"Adhikari, Achut"
+16376,STA,261,  D,Statistics,TR|,1:15pm-2:35pm|,UPH 314|WEB , Lizzy Compton
+16377,STA,261,  E,Statistics,TR|,2:50pm-4:10pm|,UPH 314|WEB ,"Adhikari, Achut"
+16378,STA,261,  F,Statistics,TR|,4:25pm-5:45pm|,UPH 314|WEB ,"Osborne, Jason"
+13391,STA,301,  A,Applied Statistics,MW|,10:05am-11:25am|,DSB 302|WEB ,"Werwinski, Lisa"
+13392,STA,301,  B,Applied Statistics,T|,8:30am-9:50am|,DSB 302|WEB ,"Werwinski, Lisa"
+18570,STA,301,  C,Applied Statistics,|T,|10:05am-11:25am,WEB |DSB 302,"Werwinski, Lisa"
+17200,STA,308,  A,Programming for Data Analytics,MWF,1:15pm-2:10pm,UPH 320,"Wright, Stephen"
+19507,STA,309,  A,Building/Managing Data Sets,MW,1:15pm-2:35pm,UPH 332,"O'Connell, Michael"
+17201,STA,309,  B,Building/Managing Data Sets,MW,2:50pm-4:10pm,UPH 320,"O'Connell, Michael"
+16457,STA,333,  A,Nonparametric Statistics,MW,11:40am-1:00pm,UPH 326,"Hughes, Michael"
+18571,STA,333,  B,Nonparametric Statistics,TR,10:05am-11:25am,UPH 339,"Adhikari, Achut"
+14953,STA,363,  A,Intro to Statistical Modeling,MW,8:30am-9:50am,UPH 332,"Smucker, Byran"
+14288,STA,363,  B,Intro to Statistical Modeling,MW,10:05am-11:25am,UPH 332,"Kim, Seonjin"
+10304,STA,363,  C,Intro to Statistical Modeling,MW,2:50pm-4:10pm,UPH 332,"Zhang, Jing"
+16359,STA,363,  D,Intro to Statistical Modeling,MW,4:25pm-5:45pm,UPH 332,"Zhang, Jing"
+17221,STA,365,  A,Monitoring/Design,TR,8:30am-9:50am,FSB 0013,"Weese, Maria"
+17222,STA,365,  B,Monitoring/Design,TR,11:40am-1:00pm,FSB 0013,"Weese, Maria"

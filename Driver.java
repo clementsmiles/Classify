@@ -59,9 +59,9 @@ public class Driver {
             } else {
                 p = new Professor(lines[2], new ArrayList<Course>());
             }
-            Course c = new Course(lines[0], lines[1], p, lines[3]);
-            classData.add(c);
-            p.addCourse(c);
+            //Course c = new Course(lines[0], lines[1], p, lines[3]);
+            //classData.add(c);
+            //p.addCourse(c);
             profData.add(p);
         }
     }

@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -17,6 +18,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ClassifyGUI extends Application {
@@ -58,22 +61,63 @@ public class ClassifyGUI extends Application {
         return null;
     }
     
+    public static String parseProfessorName(String name) {
+        String parsedName = "";
+        if (name.substring(0, 1).equals("\"")) {
+            name = name.substring(1);
+            for (int i = name.indexOf(",") + 1; i != name.indexOf(",") - 1; i++) {
+                if (name.substring(i, i+1).equals(";") || name.substring(i, i+1).equals("\"")) {
+                    i = 0;
+                }
+                parsedName += name.substring(i);
+            }
+        } else {
+            return name;
+        }
+        return parsedName;
+    }
+    
+    public static String[] correctLine(String[] values) {
+        values[8] += values[9];
+        String[] fixedArray = new String[9];
+        for (int i = 0; i < 9; i++) {
+            fixedArray[i] = values[i];
+        }
+        return fixedArray;
+    }
     public static void readData(ArrayList<Course> classData) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("src\\source\\classData.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("src\\source\\newClassData.csv"));
         String line;
         while ((line = br.readLine()) != null) {
             String[] lines = line.split(",");
+//            if (lines.length == 10) {
+//                lines = correctLine(lines);
+//            }
             Professor p;
-            if (profExists(lines[2])) {
-                p = getProfByName(lines[2]);
+            //String profName = parseProfessorName(lines[8]);
+            if (profExists(lines[8])) {
+                p = getProfByName(lines[8]);
             } else {
-                p = new Professor(lines[2], new ArrayList<Course>());
+                p = new Professor(lines[8], new ArrayList<Course>());
             }
-            Course c = new Course(lines[0], lines[1], p, lines[3]);
+            Course c = new Course(lines[0], lines[1], lines[2], lines[3],
+                    lines[4], lines[5], lines[6], lines[7], p);
             classData.add(c);
             p.addCourse(c);
             profData.add(p);
         }
+    }
+    
+    /**
+     * Gets an ObservableList of strings containing all departments.
+     * @return List of all departments
+     */
+    public ObservableList<String> getAllDepartments() {
+        HashSet<String> depList = new HashSet<String>();
+        for (int i = 0; i < classData.size(); i++) {
+            depList.add(classData.get(i).getDepartment());
+        }
+        return FXCollections.observableArrayList(depList);
     }
     
     // End backend methods
@@ -113,13 +157,8 @@ public class ClassifyGUI extends Application {
     private void showSearchDandNumWindow() {
         Stage searchStage = new Stage();
         searchStage.setTitle("Search by department and number");
-        ObservableList<String> departments = FXCollections.observableArrayList(
-                "CSE",
-                "ENG",
-                "LMS",
-                "STA"
-            );
-        ComboBox<String> departmentBox = new ComboBox<String>(departments);
+        ObservableList<String> departments = getAllDepartments();
+        ComboBox<String> departmentBox = new ComboBox<>(departments);
         TextField numField = new TextField();
         Label depLabel = new Label("Department");
         Label numLabel = new Label("Course Number");
@@ -127,23 +166,12 @@ public class ClassifyGUI extends Application {
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
         resultsArea.setWrapText(true);
-        ScrollPane scrollPane = new ScrollPane(resultsArea);
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
-        gridPane.setVgap(10);
-        gridPane.setHgap(10);
-        gridPane.add(depLabel, 0, 0);
-        gridPane.add(numLabel, 1, 0);
-        gridPane.add(departmentBox, 0, 1);
-        gridPane.add(numField, 1, 1);
-        gridPane.add(resultsArea, 3, 3);
-        gridPane.add(resultButton, 0, 4);
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setPadding(new Insets(10));
+        root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton);
         resultButton.setOnAction(e -> resultsArea.setText(courseQuery(departmentBox.getValue(), numField.getText())));
-        
-        
-        Scene scene = new Scene (gridPane, 500, 500);
+        Scene scene = new Scene(root, 800, 500);
         searchStage.setScene(scene);
         searchStage.show();
     }

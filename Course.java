@@ -18,11 +18,16 @@ public class Course {
     private Professor professor;
     
     
-    public Course(String department, String courseNum, Professor professor, String section) {
+    public Course(String courseRegNum, String department, String courseNum, String section, String title, String days, String times, String location, Professor professor) {
+        this.courseRegNum = courseRegNum;
         this.department = department;
         this.courseNum = courseNum;
-        this.professor = professor;
         this.section = section;
+        this.title = title;
+        this.days = days;
+        this.times = times;
+        this.location = location;
+        this.professor = professor;
     }
     
     public String getDepartment() {
@@ -38,8 +43,11 @@ public class Course {
     }
     
     public String getInfo() {
-        return this.department + " " + this.courseNum + " "
-                + this.section + " " + this.professor.getName() + "\n";
+        return this.courseRegNum + " " + this.department + " "
+                + this.courseNum + " " + this.section + " "
+                + this.title + " " + this.days + " "
+                + this.times + " " + this.location + " "
+                + this.professor.getName() + "\n";
     }
     
     public void print() {
