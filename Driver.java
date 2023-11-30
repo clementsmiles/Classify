@@ -81,6 +81,23 @@ public class Driver {
         return false;
     }
     
+    /**
+     * For testing purposes with GUI
+     * @param department
+     * @param courseNum
+     * @param courseData
+     * @return
+     */
+    public static String GUIcourseQuery(String department, String courseNum) {
+        String result = "";
+        for (int i = 0; i < classData.size(); i++) {
+            if (checkEquality(classData.get(i), department, courseNum)) {
+                result += classData.get(i).getInfo();
+            }
+         }
+        return result;
+    }
+    
     public static void courseQuery(String department, String courseNum, ArrayList<Course> courseData) {
         for (int i = 0; i < courseData.size(); i++) {
            if (checkEquality(courseData.get(i), department, courseNum)) {

@@ -7,10 +7,16 @@ package source;
 
 public class Course {
 
+    private String courseRegNum;
     private String department;
     private String courseNum;
-    private Professor professor;
     private String section;
+    private String title;
+    private String days;
+    private String times;
+    private String location;
+    private Professor professor;
+    
     
     public Course(String department, String courseNum, Professor professor, String section) {
         this.department = department;
@@ -29,6 +35,11 @@ public class Course {
     
     public String getProfName() {
         return professor.getName();
+    }
+    
+    public String getInfo() {
+        return this.department + " " + this.courseNum + " "
+                + this.section + " " + this.professor.getName() + "\n";
     }
     
     public void print() {
