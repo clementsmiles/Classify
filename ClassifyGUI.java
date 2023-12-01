@@ -83,7 +83,7 @@ public class ClassifyGUI extends Application {
         return name;
     }
     
-    public static String[] correctLine(String[] values) {
+    public static String[] fixName(String[] values) {
         values[8] += values[9];
         String[] fixedArray = new String[9];
         for (int i = 0; i < 9; i++) {
@@ -92,12 +92,46 @@ public class ClassifyGUI extends Application {
         return fixedArray;
     }
     
+    public static String[] fixCommasInName(String[] values) {
+        boolean foundQuote = false;
+        int iterator = 0;
+        while (!foundQuote) {
+            if (values[4 + iterator].contains("\"")) {
+                for (int i = 4; i < 4 + iterator; i++) {
+                    values[3] += values[i];
+                    values[i] = "";
+                }
+                foundQuote = true;
+            } else {
+                iterator++;
+            }
+        }
+        values[3].replaceAll(",", "");
+        ArrayList<String> fixedVals = new ArrayList<String>();
+        for (int i = 0; i < values.length; i++) {
+            if (!values[i].isEmpty()) {
+                fixedVals.add(values[i]);
+            }
+        }
+        return (String[]) fixedVals.toArray();
+    }
+    
+    public static String[] correctLine(String[] values) {
+        if (values[3].substring(0, 1).equals("\"")) {
+            values = fixCommasInName(values);
+        }
+        if (values.length == 10) {
+            values = fixName(values);
+        }
+        return values;
+    }
+    
     public static void readData(ArrayList<Course> courseData) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src\\source\\courseData.csv"));
         String line;
         while ((line = br.readLine()) != null) {
             String[] lines = line.split(",");
-            if (lines.length == 10) {
+            if (lines.length > 9) {
                 lines = correctLine(lines);
             }
             Professor p;
