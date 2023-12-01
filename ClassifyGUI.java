@@ -23,20 +23,20 @@ import javafx.stage.Stage;
 
 public class ClassifyGUI extends Application {
 
-    static ArrayList<Course> classData;
+    static ArrayList<Course> courseData;
     static ArrayList<Professor> profData;
     
     // Start backend methods, may require separate classes
     
     public static void main(String[] args) {
-        classData = new ArrayList<>();
+        courseData = new ArrayList<>();
         profData = new ArrayList<>();
         try {
-            readData(classData);
+            readData(courseData);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        classData.remove(0);
+        courseData.remove(0);
         launch(args);
     }
     
@@ -92,8 +92,8 @@ public class ClassifyGUI extends Application {
         return fixedArray;
     }
     
-    public static void readData(ArrayList<Course> classData) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("src\\source\\newClassData.csv"));
+    public static void readData(ArrayList<Course> courseData) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("src\\source\\courseData.csv"));
         String line;
         while ((line = br.readLine()) != null) {
             String[] lines = line.split(",");
@@ -109,7 +109,7 @@ public class ClassifyGUI extends Application {
             }
             Course c = new Course(lines[0], lines[1], lines[2], lines[3],
                     lines[4], lines[5], lines[6], lines[7], p);
-            classData.add(c);
+            courseData.add(c);
             p.addCourse(c);
             profData.add(p);
         }
@@ -121,8 +121,8 @@ public class ClassifyGUI extends Application {
      */
     public ObservableList<String> getAllDepartments() {
         HashSet<String> depList = new HashSet<String>();
-        for (int i = 0; i < classData.size(); i++) {
-            depList.add(classData.get(i).getDepartment());
+        for (int i = 0; i < courseData.size(); i++) {
+            depList.add(courseData.get(i).getDepartment());
         }
         return FXCollections.observableArrayList(depList);
     }
@@ -173,9 +173,9 @@ public class ClassifyGUI extends Application {
     
     public static String courseQuery(String department, String courseNum) {
         String result = "";
-        for (int i = 0; i < classData.size(); i++) {
-            if (checkEquality(classData.get(i), department, courseNum)) {
-                result += classData.get(i).getInfo();
+        for (int i = 0; i < courseData.size(); i++) {
+            if (checkEquality(courseData.get(i), department, courseNum)) {
+                result += courseData.get(i).getInfo();
             }
          }
         return result;
@@ -183,9 +183,9 @@ public class ClassifyGUI extends Application {
     
     public static String courseQuery(String department) {
         String result = "";
-        for (int i = 0; i < classData.size(); i++) {
-            if (classData.get(i).getDepartment().equals(department)) {
-                result += classData.get(i).getInfo();
+        for (int i = 0; i < courseData.size(); i++) {
+            if (courseData.get(i).getDepartment().equals(department)) {
+                result += courseData.get(i).getInfo();
             }
          }
         return result;
@@ -213,30 +213,43 @@ public class ClassifyGUI extends Application {
         	lessOrGreater = true; // true = less than
         }
         // loop through
-        for (int i = 1; i < classData.size(); i++) {
-        	String current = classData.get(i).getCourseNum();
+        for (int i = 1; i < courseData.size(); i++) {
+        	String current = courseData.get(i).getCourseNum();
         	int currentNum;
         	try {
         		currentNum = Integer.parseInt(current);
         	} catch (Exception e) {
-        		current = classData.get(i).getCourseNum();
+        		current = courseData.get(i).getCourseNum();
         		current = current.substring(0, current.length() - 1);
         		currentNum = Integer.parseInt(current);
         	}
         	
         	if (lessOrGreater == true) { // less than
         		if (currentNum <= num) {
-        			result += classData.get(i).getInfo();
+        			result += courseData.get(i).getInfo();
         		}
         	} else { // more than
         		if (currentNum > num) {
-        			result += classData.get(i).getInfo();
+        			result += courseData.get(i).getInfo();
         		}
         	}
         }
         return result;
     }
     
+    
+    public String searchProfByClass(String dep, String num) {
+        String result = "";
+        for (int i = 0; i < courseData.size(); i++) {
+            if (courseData.get(i).getDepartment().equals(dep)) {
+                if (courseData.get(i).getCourseNum().equals(num)) {
+                    result += courseData.get(i).getProfessor();
+                    result += "\n";
+                }
+            }
+        }   
+        return result;
+    }
     
     
 
@@ -282,6 +295,27 @@ public class ClassifyGUI extends Application {
         profSearchStage.setScene(scene);
         profSearchStage.show();
     }
+    
+    private void showSearchProfByClass() {
+        Stage profSearchStage = new Stage();
+        profSearchStage.setTitle("Search for professors by course");
+        Label depLabel = new Label("Department");
+        ObservableList<String> departments = getAllDepartments();
+        ComboBox<String> departmentBox = new ComboBox<>(departments);
+        Label courseLabel = new Label("Course");
+        Button resultButton = new Button("Search");
+        TextField courseField = new TextField();
+        TextArea resultsArea = new TextArea();
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setPadding(new Insets(10));
+        root.getChildren().addAll(depLabel, departmentBox, courseLabel, courseField, resultButton, resultsArea);
+        resultButton.setOnAction(e -> resultsArea.setText(searchProfByClass(departmentBox.getValue(), courseField.getText())));
+        Scene scene = new Scene(root, 800, 500);
+        profSearchStage.setScene(scene);
+        profSearchStage.show();
+    }
+    
   
   
     private void filterByDepartmentWindow() {
@@ -391,6 +425,7 @@ public class ClassifyGUI extends Application {
         professorsGridPane.add(searchByClassButton, 0, 1);
         Scene scene = new Scene(professorsGridPane, 400, 200);
         searchByNameButton.setOnAction(e -> showProfessorNameSearchWindow());
+        searchByClassButton.setOnAction(e -> showSearchProfByClass());
         professorsStage.setScene(scene);
         professorsStage.show();
     }

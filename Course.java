@@ -30,6 +30,10 @@ public class Course {
         this.professor = professor;
     }
     
+    public String getCRN() {
+        return courseRegNum;
+    }
+    
     public String getDepartment() {
         return department;
     }
@@ -57,6 +61,10 @@ public class Course {
     
     public void printProfessor() {
     	System.out.print(this.professor.getName());
+    }
+    
+    public String getProfessor() {
+        return this.professor.getName();
     }
     
     public void profDataPrint() {
