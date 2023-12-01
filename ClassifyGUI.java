@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,6 +36,7 @@ public class ClassifyGUI extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        classData.remove(0);
         launch(args);
     }
     
@@ -333,6 +333,7 @@ public class ClassifyGUI extends Application {
     @Override
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
+        mainStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         Label titleLabel = new Label("Classify");
         Button coursesButton = new Button("Courses");
         Button professorsButton = new Button("Professors");
