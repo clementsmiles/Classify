@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -92,6 +91,7 @@ public class ClassifyGUI extends Application {
         }
         return fixedArray;
     }
+    
     public static void readData(ArrayList<Course> classData) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src\\source\\newClassData.csv"));
         String line;
@@ -139,6 +139,7 @@ public class ClassifyGUI extends Application {
         return FXCollections.observableArrayList(profList);
     }
     
+     /** 
      * Makes an Observable list of strings that contain </> signs.
      * @return List of Signs
      */
@@ -270,14 +271,17 @@ public class ClassifyGUI extends Application {
         ObservableList<String> professors = getAllProfessors();
         ComboBox<String> professorBox = new ComboBox<>(professors);
         Label professorLabel = new Label("Professor");
+        Button resultButton = new Button("Search");
+        TextField resultsArea = new TextField();
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
         root.getChildren().addAll(professorLabel, professorBox, resultButton, resultsArea);
-          //resultButton.setOnAction(e -> resultsArea.setText());
+        resultButton.setOnAction(e -> resultsArea.setText("Hi"));
         Scene scene = new Scene(root, 800, 500);
         profSearchStage.setScene(scene);
         profSearchStage.show();
+    }
   
   
     private void filterByDepartmentWindow() {
@@ -389,5 +393,5 @@ public class ClassifyGUI extends Application {
         professorsStage.setScene(scene);
         professorsStage.show();
     }
-
+    
 }
