@@ -92,13 +92,14 @@ public class ClassifyGUI extends Application {
         return fixedArray;
     }
     
+    
     public static String[] fixCommasInName(String[] values) {
         boolean foundQuote = false;
         int iterator = 0;
         while (!foundQuote) {
-            if (values[4 + iterator].contains("\"")) {
-                for (int i = 4; i < 4 + iterator; i++) {
-                    values[3] += values[i];
+            if (values[5 + iterator].contains("\"")) {
+                for (int i = 5; i <= 5 + iterator; i++) {
+                    values[4] += values[i];
                     values[i] = "";
                 }
                 foundQuote = true;
@@ -106,18 +107,19 @@ public class ClassifyGUI extends Application {
                 iterator++;
             }
         }
-        values[3].replaceAll(",", "");
+        values[4] = values[4].substring(1, values[4].length() - 1);
         ArrayList<String> fixedVals = new ArrayList<String>();
         for (int i = 0; i < values.length; i++) {
             if (!values[i].isEmpty()) {
                 fixedVals.add(values[i]);
             }
         }
-        return (String[]) fixedVals.toArray();
+        String[] correctVals = fixedVals.toArray(new String[fixedVals.size()]);
+        return correctVals;
     }
     
     public static String[] correctLine(String[] values) {
-        if (values[3].substring(0, 1).equals("\"")) {
+        if (values[4].substring(0, 1).equals("\"")) {
             values = fixCommasInName(values);
         }
         if (values.length == 10) {
