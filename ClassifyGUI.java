@@ -25,6 +25,7 @@ public class ClassifyGUI extends Application {
 
     static ArrayList<Course> courseData;
     static ArrayList<Professor> profData;
+    static ArrayList<Course> backup;
     
     // Start backend methods, may require separate classes
     
@@ -33,11 +34,25 @@ public class ClassifyGUI extends Application {
         profData = new ArrayList<>();
         try {
             readData(courseData);
+            backup = deepCopy(backup, courseData);
         } catch (IOException e) {
             e.printStackTrace();
         }
         courseData.remove(0);
         launch(args);
+    }
+    
+    private static ArrayList<Course> deepCopy(ArrayList<Course> copyTo, ArrayList<Course> toCopy) {
+        if (copyTo == null) {
+            copyTo = new ArrayList<Course>();
+        } else {
+            copyTo.clear();
+        }
+        copyTo.clear();
+        for (int i = 0; i < toCopy.size(); i++) {
+            copyTo.add(toCopy.get(i));
+        }
+        return copyTo;
     }
     
     public static boolean profExists(String name) {
@@ -185,6 +200,10 @@ public class ClassifyGUI extends Application {
         }
     }
     
+    public void removeTimes(String time) {
+        
+    }
+    
     /**
      * Gets an ObservableList of strings containing all departments.
      * @return List of all departments
@@ -210,11 +229,81 @@ public class ClassifyGUI extends Application {
     }
     
     public ObservableList<String> getAllTimes() {
-        HashSet<String> timeList = new HashSet<String>();
-        for (int i = 0; i  < courseData.size(); i++) {
-            timeList.add(courseData.get(i).getTime());
+        ObservableList<String> list = FXCollections.observableArrayList(
+                "8:00am",
+                "8:30am",
+                "10:05am",
+                "11:40am",
+                "12:10pm",
+                "12:15pm",
+                "1:05pm",
+                "1:15pm",
+                "2:15pm",
+                "2:50pm",
+                "4:25pm",
+                "5:00pm",
+                "5:30pm",
+                "6:00pm",
+                "6:30pm",
+                "6:45pm",
+                "7:30pm"
+        );
+        return list;
+    }
+    
+    public ObservableList<String> getAllDays() {
+        ObservableList<String> list = FXCollections.observableArrayList(
+                "M",
+                "T",
+                "W",
+                "R",
+                "F"
+        );
+        return list;
+    }
+    
+    public void addBlackListGuide(String category, String value) {
+        switch (category) {
+        case "Professor":
+            courseData = blackListProfessor(value);
+            break;
+        case "Time":
+            courseData = blackListTime(value);
+            break;
+        case "Days":
+            courseData = blackListDays(value);
+            break;
         }
-        return FXCollections.observableArrayList(timeList);
+    }
+    
+    public ArrayList<Course> blackListProfessor(String professor) {
+        for (int i = 0; i < courseData.size(); i++) {
+            if (courseData.get(i).getProfName().equals(professor)) {
+                courseData.remove(i);
+                i--;
+            }
+        }
+        return courseData;
+    }
+    
+    public ArrayList<Course> blackListTime(String time) {
+        for (int i = 0; i < courseData.size(); i++) {
+            if (courseData.get(i).getTime().contains(time)) {
+                courseData.remove(i);
+                i--;
+            }
+        }
+        return courseData;
+    }
+    
+    public ArrayList<Course> blackListDays(String day) {
+        for (int i = 0; i < courseData.size(); i++) {
+            if (courseData.get(i).getDays().contains(day)) {
+                courseData.remove(i);
+                i--;
+            }
+        }
+        return courseData;
     }
     
      /** 
@@ -458,26 +547,46 @@ public class ClassifyGUI extends Application {
         // If no option is selected in choiceBox, this combobox is unable to be selected.
         ComboBox<String> optionBox = new ComboBox<>();
         optionBox.setDisable(true);
-//        choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-//        optionBox.getItems().clear();
-//        if (newValue != null) {
-//            switch (newValue) {
-//            case "Professor":
-//                optionBox.setItems(getAllProfessors());
-//                break;
-//            case "Time":
-//                optionBox.setItems(getAllTimes());
-//                break;
-//            case "Days":
-//                //optionBox.setItems(getAllDays());
-//                break;
-//            }
-//        }
+        Button addButton = new Button("Add to blacklist");
+        Button resetButton = new Button("Reset Blacklist");
+        Label result = new Label(" ");
+        addButton.setDisable(true);
+        choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+        optionBox.getItems().clear();
+        if (newValue != null) {
+            switch (newValue) {
+            case "Professor":
+                optionBox.setItems(getAllProfessors());
+                break;
+            case "Time":
+                optionBox.setItems(getAllTimes());
+                break;
+            case "Days":
+                optionBox.setItems(getAllDays());
+                break;
+            }
+            optionBox.setDisable(false);
+            addButton.setDisable(false);
+        } else {
+            optionBox.setDisable(true); 
+            addButton.setDisable(true);
+        }
+        });
+        
+        addButton.setOnAction(e -> {
+            addBlackListGuide(choiceBox.getValue(), optionBox.getValue());
+            result.setText("Added " + optionBox.getValue() + " to the blacklist");
+        });
+        resetButton.setOnAction(e -> {
+            courseData = deepCopy(courseData, backup);
+            result.setText("Blacklist reset.");
+        });
+        result.setText("");
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        //root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton);
-        Scene scene = new Scene(root, 800, 500);
+        root.getChildren().addAll(choiceBox, optionBox, addButton, result, resetButton);
+        Scene scene = new Scene(root, 500, 300);
         searchStage.setScene(scene);
         searchStage.show();
     }
@@ -525,6 +634,7 @@ public class ClassifyGUI extends Application {
         searchButton.setOnAction(e -> showSearchDandNumWindow());
         filterByDepartmentButton.setOnAction(e -> filterByDepartmentWindow());
         filterWithButton.setOnAction(e -> filterWithThreshold());
+        addToBlacklistButton.setOnAction(e -> addtoBlacklistMenu());
         Scene scene = new Scene(coursesGridPane, 400, 300);
         coursesStage.setScene(scene);
         coursesStage.show();
