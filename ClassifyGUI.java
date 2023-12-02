@@ -61,7 +61,14 @@ public class ClassifyGUI extends Application {
         return null;
     }
     
+    
     public static String parseProfessorName(String name) {
+        String[] titles = {"Mr. ", "Dr. ", "Mrs. ", "Ms. "};
+        for (int i = 0; i < titles.length; i++) {
+            if (name.contains(titles[i])) {
+                name = name.replaceAll(titles[i], "");
+            }
+        }
         String parsedName = "";
         if (name.contains(";")) {
             name = name.substring(0, name.indexOf(";"));
@@ -140,6 +147,19 @@ public class ClassifyGUI extends Application {
         return values;
     }
     
+    public static String[] removeRedundantSpaces(String[] values) {
+        for (int i = 0; i < values.length; i++) {
+            if (values[i].substring(0, 1).equals(" ")) {
+                values[i] = values[i].substring(1);
+            }
+            if (values[i].substring(values[i].length() - 1,
+                    values[i].length()).equals(" ")) {
+                values[i] = values[i].substring(0, values[i].length() - 1);
+            }
+        }
+        return values;
+    }
+    
     public static void readData(ArrayList<Course> courseData) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src\\source\\courseData.csv"));
         String line;
@@ -150,11 +170,12 @@ public class ClassifyGUI extends Application {
             }
             lines = checkForNulls(lines);
             Professor p;
-            String profName = parseProfessorName(lines[8]);
-            if (profExists(profName)) {
-                p = getProfByName(profName);
+            lines[8] = parseProfessorName(lines[8]);
+            lines = removeRedundantSpaces(lines);
+            if (profExists(lines[8])) {
+                p = getProfByName(lines[8]);
             } else {
-                p = new Professor(profName, new ArrayList<Course>());
+                p = new Professor(lines[8], new ArrayList<Course>());
             }
             Course c = new Course(lines[0], lines[1], lines[2], lines[3],
                     lines[4], lines[5], lines[6], lines[7], p);
