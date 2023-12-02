@@ -130,7 +130,7 @@ public class ClassifyGUI extends Application {
     
     public static String[] checkForNulls(String[] values) {
         for (int i = 0; i < 8; i++) {
-            if (values[i].isBlank()) {
+            if (values[i].isBlank() || values[i].equals("|")) {
                 values[i] = "n/a";
             }
         }
