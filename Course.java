@@ -67,6 +67,10 @@ public class Course {
         return this.professor.getName();
     }
     
+    public String getTime() {
+        return this.times;
+    }
+    
     public void profDataPrint() {
         System.out.println(this.department + " " + this.courseNum + " " 
                 + this.section);

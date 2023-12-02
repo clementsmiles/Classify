@@ -209,6 +209,14 @@ public class ClassifyGUI extends Application {
         return FXCollections.observableArrayList(profList);
     }
     
+    public ObservableList<String> getAllTimes() {
+        HashSet<String> timeList = new HashSet<String>();
+        for (int i = 0; i  < courseData.size(); i++) {
+            timeList.add(courseData.get(i).getTime());
+        }
+        return FXCollections.observableArrayList(timeList);
+    }
+    
      /** 
      * Makes an Observable list of strings that contain </> signs.
      * @return List of Signs
@@ -432,6 +440,46 @@ public class ClassifyGUI extends Application {
         searchStage.setScene(scene);
         searchStage.show();
 
+    }
+    
+    
+    private void addtoBlacklistMenu() {
+        Stage searchStage = new Stage();
+        searchStage.setTitle("Add to Blacklist");
+        ObservableList<String> choices = FXCollections.observableArrayList(
+                "Professor",
+                "Time",
+                "Days"
+        );
+        ComboBox<String> choiceBox = new ComboBox<>(choices);
+        // I need a combo box which changes the values inside depending
+        // which of choiceBox is currently chosen. The ObservableList for each
+        // is creatable via getAllTimes(), getAllProfessors(), and getAllDays().
+        // If no option is selected in choiceBox, this combobox is unable to be selected.
+        ComboBox<String> optionBox = new ComboBox<>();
+        optionBox.setDisable(true);
+//        choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+//        optionBox.getItems().clear();
+//        if (newValue != null) {
+//            switch (newValue) {
+//            case "Professor":
+//                optionBox.setItems(getAllProfessors());
+//                break;
+//            case "Time":
+//                optionBox.setItems(getAllTimes());
+//                break;
+//            case "Days":
+//                //optionBox.setItems(getAllDays());
+//                break;
+//            }
+//        }
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setPadding(new Insets(10));
+        //root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton);
+        Scene scene = new Scene(root, 800, 500);
+        searchStage.setScene(scene);
+        searchStage.show();
     }
     
     @Override
