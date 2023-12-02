@@ -61,7 +61,14 @@ public class ClassifyGUI extends Application {
         return null;
     }
     
+    
     public static String parseProfessorName(String name) {
+        String[] titles = {"Mr. ", "Dr. ", "Mrs. ", "Ms. "};
+        for (int i = 0; i < titles.length; i++) {
+            if (name.contains(titles[i])) {
+                name = name.replaceAll(titles[i], "");
+            }
+        }
         String parsedName = "";
         if (name.contains(";")) {
             name = name.substring(0, name.indexOf(";"));
