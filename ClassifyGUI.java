@@ -128,6 +128,18 @@ public class ClassifyGUI extends Application {
         return values;
     }
     
+    public static String[] checkForNulls(String[] values) {
+        for (int i = 0; i < 8; i++) {
+            if (values[i].isBlank() || values[i].equals("|")) {
+                values[i] = "n/a";
+            }
+        }
+        if (values[8].equals("Staff")) {
+            values[8] = "n/a";
+        }
+        return values;
+    }
+    
     public static void readData(ArrayList<Course> courseData) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src\\source\\courseData.csv"));
         String line;
@@ -136,6 +148,7 @@ public class ClassifyGUI extends Application {
             if (lines.length > 9) {
                 lines = correctLine(lines);
             }
+            lines = checkForNulls(lines);
             Professor p;
             String profName = parseProfessorName(lines[8]);
             if (profExists(profName)) {
