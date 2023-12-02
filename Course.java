@@ -71,6 +71,10 @@ public class Course {
         return this.times;
     }
     
+    public String getDays() {
+        return this.days;
+    }
+    
     public void profDataPrint() {
         System.out.println(this.department + " " + this.courseNum + " " 
                 + this.section);

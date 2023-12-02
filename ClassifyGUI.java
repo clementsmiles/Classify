@@ -217,6 +217,17 @@ public class ClassifyGUI extends Application {
         return FXCollections.observableArrayList(timeList);
     }
     
+    public ObservableList<String> getAllDays() {
+        ObservableList<String> list = FXCollections.observableArrayList(
+                "M",
+                "T",
+                "W",
+                "R",
+                "F"
+        );
+        return list;
+    }
+    
      /** 
      * Makes an Observable list of strings that contain </> signs.
      * @return List of Signs
@@ -458,26 +469,32 @@ public class ClassifyGUI extends Application {
         // If no option is selected in choiceBox, this combobox is unable to be selected.
         ComboBox<String> optionBox = new ComboBox<>();
         optionBox.setDisable(true);
-//        choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-//        optionBox.getItems().clear();
-//        if (newValue != null) {
-//            switch (newValue) {
-//            case "Professor":
-//                optionBox.setItems(getAllProfessors());
-//                break;
-//            case "Time":
-//                optionBox.setItems(getAllTimes());
-//                break;
-//            case "Days":
-//                //optionBox.setItems(getAllDays());
-//                break;
-//            }
-//        }
+        choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+        optionBox.getItems().clear();
+        if (newValue != null) {
+            switch (newValue) {
+            case "Professor":
+                optionBox.setItems(getAllProfessors());
+                break;
+            case "Time":
+                optionBox.setItems(getAllTimes());
+                break;
+            case "Days":
+                optionBox.setItems(getAllDays());
+                break;
+            }
+            optionBox.setDisable(false);
+        } else {
+            optionBox.setDisable(true); 
+        }
+        });
+        Button addButton = new Button("Add to blacklist");
+        Label result = new Label(" ");
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        //root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton);
-        Scene scene = new Scene(root, 800, 500);
+        root.getChildren().addAll(choiceBox, optionBox, addButton, result);
+        Scene scene = new Scene(root, 500, 300);
         searchStage.setScene(scene);
         searchStage.show();
     }
@@ -525,6 +542,7 @@ public class ClassifyGUI extends Application {
         searchButton.setOnAction(e -> showSearchDandNumWindow());
         filterByDepartmentButton.setOnAction(e -> filterByDepartmentWindow());
         filterWithButton.setOnAction(e -> filterWithThreshold());
+        addToBlacklistButton.setOnAction(e -> addtoBlacklistMenu());
         Scene scene = new Scene(coursesGridPane, 400, 300);
         coursesStage.setScene(scene);
         coursesStage.show();
