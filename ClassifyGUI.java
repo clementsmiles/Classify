@@ -25,6 +25,7 @@ public class ClassifyGUI extends Application {
 
     static ArrayList<Course> courseData;
     static ArrayList<Professor> profData;
+    static ArrayList<Course> backup;
     
     // Start backend methods, may require separate classes
     
@@ -33,11 +34,25 @@ public class ClassifyGUI extends Application {
         profData = new ArrayList<>();
         try {
             readData(courseData);
+            deepCopy(backup, courseData);
         } catch (IOException e) {
             e.printStackTrace();
         }
         courseData.remove(0);
         launch(args);
+    }
+    
+    private static ArrayList<Course> deepCopy(ArrayList<Course> copyTo, ArrayList<Course> toCopy) {
+        if (copyTo == null) {
+            copyTo = new ArrayList<Course>();
+        } else {
+            copyTo.clear();
+        }
+        copyTo.clear();
+        for (int i = 0; i < toCopy.size(); i++) {
+            copyTo.add(toCopy.get(i));
+        }
+        return copyTo;
     }
     
     public static boolean profExists(String name) {
@@ -185,6 +200,10 @@ public class ClassifyGUI extends Application {
         }
     }
     
+    public void removeTimes(String time) {
+        
+    }
+    
     /**
      * Gets an ObservableList of strings containing all departments.
      * @return List of all departments
@@ -210,11 +229,18 @@ public class ClassifyGUI extends Application {
     }
     
     public ObservableList<String> getAllTimes() {
-        HashSet<String> timeList = new HashSet<String>();
-        for (int i = 0; i  < courseData.size(); i++) {
-            timeList.add(courseData.get(i).getTime());
-        }
-        return FXCollections.observableArrayList(timeList);
+        ObservableList<String> list = FXCollections.observableArrayList(
+                "8:30am",
+                "10:05am",
+                "11:40am",
+                "12:15pm",
+                "1:15pm",
+                "2:35pm",
+                "2:50pm",
+                "4:25pm",
+                "7:30pm"
+        );
+        return list;
     }
     
     public ObservableList<String> getAllDays() {
@@ -226,6 +252,44 @@ public class ClassifyGUI extends Application {
                 "F"
         );
         return list;
+    }
+    
+    public void addBlackListGuide(String category, String value) {
+        switch (category) {
+        case "Professor":
+            blackListProfessor(value);
+            break;
+        case "Times":
+            blackListTime(value);
+            break;
+        case "Days":
+            blackListDays(value);
+            break;
+        }
+    }
+    
+    public void blackListProfessor(String professor) {
+        for (int i = 0; i < courseData.size(); i++) {
+            if (courseData.get(i).getProfName().equals(professor)) {
+                courseData.remove(i);
+            }
+        }
+    }
+    
+    public void blackListTime(String time) {
+        for (int i = 0; i < courseData.size(); i++) {
+            if (courseData.get(i).getTime().contains(time)) {
+                courseData.remove(i);
+            }
+        }
+    }
+    
+    public void blackListDays(String day) {
+        for (int i = 0; i < courseData.size(); i++) {
+            if (courseData.get(i).getDays().contains(day)) {
+                courseData.remove(i);
+            }
+        }
     }
     
      /** 
@@ -469,6 +533,10 @@ public class ClassifyGUI extends Application {
         // If no option is selected in choiceBox, this combobox is unable to be selected.
         ComboBox<String> optionBox = new ComboBox<>();
         optionBox.setDisable(true);
+        Button addButton = new Button("Add to blacklist");
+        Button resetButton = new Button("Reset Blacklist");
+        Label result = new Label(" ");
+        addButton.setDisable(true);
         choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
         optionBox.getItems().clear();
         if (newValue != null) {
@@ -484,16 +552,26 @@ public class ClassifyGUI extends Application {
                 break;
             }
             optionBox.setDisable(false);
+            addButton.setDisable(false);
         } else {
             optionBox.setDisable(true); 
+            addButton.setDisable(true);
         }
         });
-        Button addButton = new Button("Add to blacklist");
-        Label result = new Label(" ");
+        
+        addButton.setOnAction(e -> {
+            addBlackListGuide(choiceBox.getValue(), optionBox.getValue());
+            result.setText("Added " + optionBox.getValue() + " to the blacklist");
+        });
+        resetButton.setOnAction(e -> {
+            deepCopy(courseData, backup);
+            result.setText("Blacklist reset.");
+        });
+        result.setText("");
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(choiceBox, optionBox, addButton, result);
+        root.getChildren().addAll(choiceBox, optionBox, addButton, result, resetButton);
         Scene scene = new Scene(root, 500, 300);
         searchStage.setScene(scene);
         searchStage.show();
