@@ -34,7 +34,7 @@ public class ClassifyGUI extends Application {
         profData = new ArrayList<>();
         try {
             readData(courseData);
-            deepCopy(backup, courseData);
+            backup = deepCopy(backup, courseData);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -230,14 +230,22 @@ public class ClassifyGUI extends Application {
     
     public ObservableList<String> getAllTimes() {
         ObservableList<String> list = FXCollections.observableArrayList(
+                "8:00am",
                 "8:30am",
                 "10:05am",
                 "11:40am",
+                "12:10pm",
                 "12:15pm",
+                "1:05pm",
                 "1:15pm",
-                "2:35pm",
+                "2:15pm",
                 "2:50pm",
                 "4:25pm",
+                "5:00pm",
+                "5:30pm",
+                "6:00pm",
+                "6:30pm",
+                "6:45pm",
                 "7:30pm"
         );
         return list;
@@ -257,39 +265,45 @@ public class ClassifyGUI extends Application {
     public void addBlackListGuide(String category, String value) {
         switch (category) {
         case "Professor":
-            blackListProfessor(value);
+            courseData = blackListProfessor(value);
             break;
-        case "Times":
-            blackListTime(value);
+        case "Time":
+            courseData = blackListTime(value);
             break;
         case "Days":
-            blackListDays(value);
+            courseData = blackListDays(value);
             break;
         }
     }
     
-    public void blackListProfessor(String professor) {
+    public ArrayList<Course> blackListProfessor(String professor) {
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getProfName().equals(professor)) {
                 courseData.remove(i);
+                i--;
             }
         }
+        return courseData;
     }
     
-    public void blackListTime(String time) {
+    public ArrayList<Course> blackListTime(String time) {
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getTime().contains(time)) {
                 courseData.remove(i);
+                i--;
             }
         }
+        return courseData;
     }
     
-    public void blackListDays(String day) {
+    public ArrayList<Course> blackListDays(String day) {
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getDays().contains(day)) {
                 courseData.remove(i);
+                i--;
             }
         }
+        return courseData;
     }
     
      /** 
@@ -564,7 +578,7 @@ public class ClassifyGUI extends Application {
             result.setText("Added " + optionBox.getValue() + " to the blacklist");
         });
         resetButton.setOnAction(e -> {
-            deepCopy(courseData, backup);
+            courseData = deepCopy(courseData, backup);
             result.setText("Blacklist reset.");
         });
         result.setText("");
