@@ -3,8 +3,9 @@
  * Copyright 2023 Miles Clements, Jake Ross, Justin Darling, Harrison Frisk, Sam Clark
  */
 
-//*****IMPORTANT********
-//REMOVE THIS BEFORE TURNING IN!!!!!!!!!!
+//*****EXTREMELY IMPORTANT IMPORTANT********
+//REMOVE THIS package source BEFORE TURNING IN!!!!!!!!!!
+//ALSO CHANGE .CSV FILE LOCATION TO src\\courseData.csv
 package source;
 //*****IMPORTANT*************************
 import java.io.BufferedReader;
