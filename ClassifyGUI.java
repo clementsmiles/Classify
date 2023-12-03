@@ -619,7 +619,9 @@ public class ClassifyGUI extends Application {
         ComboBox<String> departmentBox = new ComboBox<>(departments);
         TextField numField = new TextField();
         Label depLabel = new Label("Department");
+        depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Label numLabel = new Label("Course Number");
+        numLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button resultButton = new Button("Search!");
         Button pdfButton = new Button("Save to PDF");
         pdfButton.setDisable(true);
@@ -635,7 +637,7 @@ public class ClassifyGUI extends Application {
         root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton, pdfButton);
         resultButton.setOnAction(e -> resultsArea.setText(courseQuery(departmentBox.getValue(), numField.getText())));
         pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 800, 410);
         searchStage.setScene(scene);
         searchStage.show();
     }
@@ -647,6 +649,7 @@ public class ClassifyGUI extends Application {
         ObservableList<String> professors = getAllProfessors();
         ComboBox<String> professorBox = new ComboBox<>(professors);
         Label professorLabel = new Label("Professor");
+        professorLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button resultButton = new Button("Search");
         TextField resultsArea = new TextField();
         VBox root = new VBox();
@@ -666,9 +669,11 @@ public class ClassifyGUI extends Application {
         Stage profSearchStage = new Stage();
         profSearchStage.setTitle("Search for professors by course");
         Label depLabel = new Label("Department");
+        depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
         Label courseLabel = new Label("Course");
+        courseLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button resultButton = new Button("Search");
         TextField courseField = new TextField();
         TextArea resultsArea = new TextArea();
@@ -677,7 +682,7 @@ public class ClassifyGUI extends Application {
         root.setPadding(new Insets(10));
         root.getChildren().addAll(depLabel, departmentBox, courseLabel, courseField, resultButton, resultsArea);
         resultButton.setOnAction(e -> resultsArea.setText(searchProfByClass(departmentBox.getValue(), courseField.getText())));
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 800, 390);
         profSearchStage.setScene(scene);
         profSearchStage.show();
     }
@@ -689,6 +694,7 @@ public class ClassifyGUI extends Application {
         Stage searchStage = new Stage();
         searchStage.setTitle("Filter by Department");
         Label depLabel = new Label("Department");
+        depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
         Button resultButton = new Button("Search!");
@@ -706,7 +712,7 @@ public class ClassifyGUI extends Application {
         root.getChildren().addAll(depLabel, departmentBox, resultsArea, resultButton, pdfButton);
         resultButton.setOnAction(e -> resultsArea.setText(courseQuery(departmentBox.getValue())));
         pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 800, 350);
         searchStage.setScene(scene);
         searchStage.show();
     }
@@ -721,7 +727,9 @@ public class ClassifyGUI extends Application {
         ComboBox<String> signBox = new ComboBox<>(signs);
         TextField numField = new TextField();
         Label numLabel = new Label("Course Level");
+        numLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Label signLabel = new Label("Greater/Less Than");
+        signLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button resultButton = new Button("Search!");
         Button pdfButton = new Button("Save to PDF");
         pdfButton.setDisable(true);
@@ -737,7 +745,7 @@ public class ClassifyGUI extends Application {
         root.getChildren().addAll(signLabel, signBox, numLabel, numField, resultsArea, resultButton, pdfButton);
         resultButton.setOnAction(e -> resultsArea.setText(signCourseQuery(signBox.getValue(), numField.getText())));
         pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 800, 400);
         searchStage.setScene(scene);
         searchStage.show();
 
@@ -758,7 +766,9 @@ public class ClassifyGUI extends Application {
         ComboBox<String> optionBox = new ComboBox<>();
         optionBox.setDisable(true);
         Label categoryLabel = new Label("Category");
+        categoryLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Label optionLabel = new Label("Option");
+        optionLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button addButton = new Button("Add to blacklist");
         Button resetButton = new Button("Reset Blacklist");
         Label result = new Label(" ");
@@ -795,10 +805,11 @@ public class ClassifyGUI extends Application {
         });
         result.setText("");
         VBox root = new VBox();
+        root.setAlignment(Pos.CENTER);
         root.setSpacing(10);
         root.setPadding(new Insets(10));
         root.getChildren().addAll(categoryLabel, choiceBox, optionLabel, optionBox, addButton, result, resetButton);
-        Scene scene = new Scene(root, 250, 250);
+        Scene scene = new Scene(root, 250, 265);
         searchStage.setScene(scene);
         searchStage.show();
     }
