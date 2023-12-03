@@ -1,3 +1,8 @@
+/*
+ * Classify Application
+ * Copyright 2023 Miles Clements, Jake Ross, Justin Darling, Harrison Frisk, Sam Clark
+ */
+
 package source;
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,9 +19,12 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -28,6 +36,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class ClassifyGUI extends Application {
@@ -36,7 +46,7 @@ public class ClassifyGUI extends Application {
     static ArrayList<Professor> profData;
     static ArrayList<Course> backup;
     
-    // Start backend methods, may require separate classes
+    // Start backend methods
     
     public static void main(String[] args) {
         courseData = new ArrayList<>();
@@ -50,7 +60,12 @@ public class ClassifyGUI extends Application {
         courseData.remove(0);
         launch(args);
     }
-    
+    /**
+     * Copies the contents of one list to another.
+     * @param copyTo List to copy elements to (data will be cleared!)
+     * @param toCopy List to copy elements from
+     * @return
+     */
     private static ArrayList<Course> deepCopy(ArrayList<Course> copyTo, ArrayList<Course> toCopy) {
         if (copyTo == null) {
             copyTo = new ArrayList<Course>();
@@ -64,6 +79,11 @@ public class ClassifyGUI extends Application {
         return copyTo;
     }
     
+    /**
+     * Checks if a professor exists by their name.
+     * @param name Name to search for
+     * @return True if professor exists, false otherwise
+     */
     public static boolean profExists(String name) {
         if (profData.isEmpty()) {
             return false;
@@ -76,6 +96,10 @@ public class ClassifyGUI extends Application {
         return false;
     }
     
+    /**
+     * Exports results (text) to a .PDF file in the Classify directory.
+     * @param text Results to export to the .PDF file
+     */
     public static void exportToPDF(String text) {
         String[] lines = text.split("\n");
         try {
@@ -126,6 +150,11 @@ public class ClassifyGUI extends Application {
         }
     }
     
+    /**
+     * Given a name, returns the corresponding Professor object.
+     * @param name Name to search
+     * @return Professor object if exists, null otherwise
+     */
     public static Professor getProfByName(String name) {
         for (int i = 0; i < profData.size(); i++) {
             if (name.equals(profData.get(i).getName())) {
@@ -135,7 +164,14 @@ public class ClassifyGUI extends Application {
         return null;
     }
     
-    
+    /**
+     * Parse a professor name for use in the professor object.
+     * Parsing includes removing titles (Mr. Dr. etc), swapping
+     * first and last names if they are flipped, removes additional
+     * appended names, and removing quotation marks.
+     * @param name Professor name to parse
+     * @return Parsed professor name
+     */
     public static String parseProfessorName(String name) {
         String[] titles = {"Mr. ", "Dr. ", "Mrs. ", "Ms. "};
         for (int i = 0; i < titles.length; i++) {
@@ -164,6 +200,11 @@ public class ClassifyGUI extends Application {
         return name;
     }
     
+    /**
+     * Method used to fix a name that was read wrong due to commas.
+     * @param values Values read for Course object
+     * @return Fixed String Array of values with a correct name
+     */
     public static String[] fixName(String[] values) {
         values[8] += values[9];
         String[] fixedArray = new String[9];
@@ -173,7 +214,11 @@ public class ClassifyGUI extends Application {
         return fixedArray;
     }
     
-    
+    /**
+     * Fixes a course title that was read wrong due to commas in name.
+     * @param values Values read for a Course object
+     * @return Corrected String array with correct course title
+     */
     public static String[] fixCommasInName(String[] values) {
         boolean foundQuote = false;
         int iterator = 0;
@@ -199,6 +244,12 @@ public class ClassifyGUI extends Application {
         return correctVals;
     }
     
+    /**
+     * Helper method to find out any potential issues with a given
+     * String array containing values for a Course object
+     * @param values String array of values for Course object
+     * @return Corrected String Array
+     */
     public static String[] correctLine(String[] values) {
         if (values[4].substring(0, 1).equals("\"")) {
             values = fixCommasInName(values);
@@ -209,6 +260,12 @@ public class ClassifyGUI extends Application {
         return values;
     }
     
+    /**
+     * Checks all values in String array for null or placeholder values.
+     * Replaces them with n/a for readability.
+     * @param values Values with potential nulls
+     * @return String array with corrected nulls
+     */
     public static String[] checkForNulls(String[] values) {
         for (int i = 0; i < 8; i++) {
             if (values[i].isBlank() || values[i].equals("|")) {
@@ -221,6 +278,11 @@ public class ClassifyGUI extends Application {
         return values;
     }
     
+    /**
+     * Removes any redundant spaces in any given value for readability.
+     * @param values Values with potential redundant spaces
+     * @return String array with corrected values
+     */
     public static String[] removeRedundantSpaces(String[] values) {
         for (int i = 0; i < values.length; i++) {
             if (values[i].substring(0, 1).equals(" ")) {
@@ -234,6 +296,11 @@ public class ClassifyGUI extends Application {
         return values;
     }
     
+    /**
+     * Reads data from the given .csv file.
+     * @param courseData List containing all course data
+     * @throws IOException thrown if .csv file not found
+     */
     public static void readData(ArrayList<Course> courseData) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src\\source\\courseData.csv"));
         String line;
@@ -259,10 +326,6 @@ public class ClassifyGUI extends Application {
         }
     }
     
-    public void removeTimes(String time) {
-        
-    }
-    
     /**
      * Gets an ObservableList of strings containing all departments.
      * @return List of all departments
@@ -276,7 +339,7 @@ public class ClassifyGUI extends Application {
     }
     
     /**
-     * Gets an ObservalbleList of strings containing all professors
+     * Gets an ObservableList of strings containing all professors
      * @return List of all professors
      */
     public ObservableList<String> getAllProfessors() {
@@ -287,6 +350,10 @@ public class ClassifyGUI extends Application {
         return FXCollections.observableArrayList(profList);
     }
     
+    /**
+     * Gets an ObservableList of strings containing a curated list of times.
+     * @return List of curated times
+     */
     public ObservableList<String> getAllTimes() {
         ObservableList<String> list = FXCollections.observableArrayList(
                 "8:00am",
@@ -310,6 +377,10 @@ public class ClassifyGUI extends Application {
         return list;
     }
     
+    /**
+     * Returns an ObservableList of strings containing days of the week.
+     * @return List of days of week
+     */
     public ObservableList<String> getAllDays() {
         ObservableList<String> list = FXCollections.observableArrayList(
                 "M",
@@ -321,6 +392,11 @@ public class ClassifyGUI extends Application {
         return list;
     }
     
+    /**
+     * Helper method used to guide blacklist values to their proper removal.
+     * @param category Category to remove
+     * @param value Value to remove
+     */
     public void addBlackListGuide(String category, String value) {
         switch (category) {
         case "Professor":
@@ -335,6 +411,11 @@ public class ClassifyGUI extends Application {
         }
     }
     
+    /**
+     * Adds a professor to the blacklist.
+     * @param professor Professor name to add
+     * @return New courseList minus Professor that was blacklisted
+     */
     public ArrayList<Course> blackListProfessor(String professor) {
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getProfName().equals(professor)) {
@@ -345,6 +426,11 @@ public class ClassifyGUI extends Application {
         return courseData;
     }
     
+    /**
+     * Adds a time to the blacklist.
+     * @param time Time to blacklist
+     * @return Course List minus time blacklisted
+     */
     public ArrayList<Course> blackListTime(String time) {
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getTime().contains(time)) {
@@ -355,6 +441,11 @@ public class ClassifyGUI extends Application {
         return courseData;
     }
     
+    /**
+     * Adds a day to the blacklist.
+     * @param day Day of week to blacklist
+     * @return Course list minus day to blacklist
+     */
     public ArrayList<Course> blackListDays(String day) {
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getDays().contains(day)) {
@@ -382,6 +473,14 @@ public class ClassifyGUI extends Application {
     
     // Start query methods
     
+    /**
+     * Checks if a course is equal to a given department
+     * and course number combo.
+     * @param currentCourse Course to compare against
+     * @param d Department
+     * @param c Course number
+     * @return true if equal, false otherwise
+     */
     public static boolean checkEquality(Course currentCourse, String d, String c) {
         if (d.equals(currentCourse.getDepartment())) {
             if (c.length() == 1) {
@@ -397,6 +496,12 @@ public class ClassifyGUI extends Application {
         return false;
     }
     
+    /**
+     * Searches for courses with the given criteria.
+     * @param department Department
+     * @param courseNum Course Number
+     * @return String containing all matching courses information
+     */
     public static String courseQuery(String department, String courseNum) {
         String result = "";
         for (int i = 0; i < courseData.size(); i++) {
@@ -407,6 +512,11 @@ public class ClassifyGUI extends Application {
         return result;
     }
     
+    /**
+     * Searches for courses with the given criteria.
+     * @param department Department
+     * @return String containing all matching courses information
+     */
     public static String courseQuery(String department) {
         String result = "";
         for (int i = 0; i < courseData.size(); i++) {
@@ -417,6 +527,13 @@ public class ClassifyGUI extends Application {
         return result;
     }
     
+    /**
+     * Searches for courses that are above or below a certain
+     * level threshold
+     * @param sign Greater than, less than
+     * @param courseNum Number to compare to
+     * @return String of matching courses info
+     */
     public static String signCourseQuery(String sign, String courseNum) {
     	// make variables / accounting for 1/2/3/4
         String result = "";
@@ -463,7 +580,12 @@ public class ClassifyGUI extends Application {
         return result;
     }
     
-    
+    /**
+     * Searches for a professor given a course they teach
+     * @param dep Department of course
+     * @param num Number of course
+     * @return String of matching professor's info
+     */
     public String searchProfByClass(String dep, String num) {
         String result = "";
         for (int i = 0; i < courseData.size(); i++) {
@@ -481,6 +603,9 @@ public class ClassifyGUI extends Application {
 
     // Start GUI/FX methods
     
+    /**
+     * Shows menu for searching by department and course number.
+     */
     private void showSearchDandNumWindow() {
         Stage searchStage = new Stage();
         searchStage.setTitle("Search by department and number");
@@ -528,6 +653,9 @@ public class ClassifyGUI extends Application {
         profSearchStage.show();
     }
     
+    /**
+     * Shows the menu for searching a professor by course.
+     */
     private void showSearchProfByClass() {
         Stage profSearchStage = new Stage();
         profSearchStage.setTitle("Search for professors by course");
@@ -547,9 +675,10 @@ public class ClassifyGUI extends Application {
         profSearchStage.setScene(scene);
         profSearchStage.show();
     }
-    
   
-  
+    /**
+     * Shows the menu for searching for courses by department.
+     */
     private void filterByDepartmentWindow() {
         Stage searchStage = new Stage();
         searchStage.setTitle("Filter by Department");
@@ -576,9 +705,9 @@ public class ClassifyGUI extends Application {
         searchStage.show();
     }
 
-        
-        
-    
+    /**
+     * Shows the menu for searching by a course number threshold.
+     */
     private void filterWithThreshold() {
         Stage searchStage = new Stage();
         searchStage.setTitle("Filter with a class level threshold");
@@ -608,7 +737,9 @@ public class ClassifyGUI extends Application {
 
     }
     
-    
+    /**
+     * Shows the menu for adding attributes to the blacklist.
+     */
     private void addtoBlacklistMenu() {
         Stage searchStage = new Stage();
         searchStage.setTitle("Add to Blacklist");
@@ -620,6 +751,8 @@ public class ClassifyGUI extends Application {
         ComboBox<String> choiceBox = new ComboBox<>(choices);
         ComboBox<String> optionBox = new ComboBox<>();
         optionBox.setDisable(true);
+        Label categoryLabel = new Label("Category");
+        Label optionLabel = new Label("Option");
         Button addButton = new Button("Add to blacklist");
         Button resetButton = new Button("Reset Blacklist");
         Label result = new Label(" ");
@@ -658,37 +791,43 @@ public class ClassifyGUI extends Application {
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(choiceBox, optionBox, addButton, result, resetButton);
-        Scene scene = new Scene(root, 500, 300);
+        root.getChildren().addAll(categoryLabel, choiceBox, optionLabel, optionBox, addButton, result, resetButton);
+        Scene scene = new Scene(root, 250, 250);
         searchStage.setScene(scene);
         searchStage.show();
     }
     
-    @Override
+     /**
+      * Shows the Classify main menu.
+      */
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
         mainStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
+        mainStage.setOnCloseRequest(new EventHandler<javafx.stage.WindowEvent>() {
+            @Override
+            public void handle(javafx.stage.WindowEvent event) {
+                Platform.exit();
+            }
+        });
+
         Label titleLabel = new Label("Classify");
+        titleLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button coursesButton = new Button("Courses");
         Button professorsButton = new Button("Professors");
-        GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
-        gridPane.setVgap(10);
-        gridPane.setHgap(10);
-        gridPane.add (titleLabel, 0, 0);
-        gridPane.add(coursesButton, 0, 1);
-        gridPane.add(professorsButton, 1, 1);
-        gridPane.setColumnSpan(titleLabel, 2);
         coursesButton.setOnAction(e -> showCoursesWindow());
         professorsButton.setOnAction(e -> showProfessorsWindow());
         VBox vbox = new VBox(10);
-        vbox.setPadding(new Insets(10,10, 10, 10));
-        vbox.getChildren().add(gridPane);
-        Scene scene = new Scene(vbox, 200, 100);
+        vbox.setPadding(new Insets(10, 10, 10, 10));
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton);
+        Scene scene = new Scene(vbox, 250, 150);
         mainStage.setScene(scene);
         mainStage.show();
     }
     
+    /**
+     * Shows the menu for Course operations.
+     */
     private void showCoursesWindow() {
         Stage coursesStage = new Stage();
         coursesStage.setTitle("Courses Menu");
@@ -708,11 +847,14 @@ public class ClassifyGUI extends Application {
         filterByDepartmentButton.setOnAction(e -> filterByDepartmentWindow());
         filterWithButton.setOnAction(e -> filterWithThreshold());
         addToBlacklistButton.setOnAction(e -> addtoBlacklistMenu());
-        Scene scene = new Scene(coursesGridPane, 400, 300);
+        Scene scene = new Scene(coursesGridPane, 300, 170);
         coursesStage.setScene(scene);
         coursesStage.show();
     }
 
+    /**
+     * Shows the menu for Professor operations.
+     */
     private void showProfessorsWindow() {
         Stage professorsStage = new Stage();
         professorsStage.setTitle("Professors Menu");
@@ -724,7 +866,7 @@ public class ClassifyGUI extends Application {
         professorsGridPane.setHgap(10);
         professorsGridPane.add(searchByNameButton, 0, 0);
         professorsGridPane.add(searchByClassButton, 0, 1);
-        Scene scene = new Scene(professorsGridPane, 400, 200);
+        Scene scene = new Scene(professorsGridPane, 300, 100);
         searchByNameButton.setOnAction(e -> showProfessorNameSearchWindow());
         searchByClassButton.setOnAction(e -> showSearchProfByClass());
         professorsStage.setScene(scene);
