@@ -835,13 +835,15 @@ public class ClassifyGUI extends Application {
         titleLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button coursesButton = new Button("Courses");
         Button professorsButton = new Button("Professors");
+        Button addToBlacklistButton = new Button("Add to blacklist");
         coursesButton.setOnAction(e -> showCoursesWindow());
         professorsButton.setOnAction(e -> showProfessorsWindow());
+        addToBlacklistButton.setOnAction(e -> addtoBlacklistMenu());
         VBox vbox = new VBox(10);
         vbox.setPadding(new Insets(10, 10, 10, 10));
         vbox.setAlignment(Pos.CENTER);
-        vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton);
-        Scene scene = new Scene(vbox, 250, 150);
+        vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton, addToBlacklistButton);
+        Scene scene = new Scene(vbox, 250, 175);
         mainStage.setScene(scene);
         mainStage.show();
     }
@@ -855,7 +857,6 @@ public class ClassifyGUI extends Application {
         Button searchButton = new Button("Search by department and course number");
         Button filterByDepartmentButton = new Button("Filter by department");
         Button filterWithButton = new Button("Filter courses with a class level threshold");
-        Button addToBlacklistButton = new Button("Add to blacklist");
         GridPane coursesGridPane = new GridPane();
         coursesGridPane.setPadding(new Insets(10, 10, 10, 10));
         coursesGridPane.setVgap(10);
@@ -863,12 +864,10 @@ public class ClassifyGUI extends Application {
         coursesGridPane.add(searchButton, 0, 0);
         coursesGridPane.add(filterByDepartmentButton, 0, 1);
         coursesGridPane.add(filterWithButton, 0, 2);
-        coursesGridPane.add(addToBlacklistButton, 0, 3);
         searchButton.setOnAction(e -> showSearchDandNumWindow());
         filterByDepartmentButton.setOnAction(e -> filterByDepartmentWindow());
         filterWithButton.setOnAction(e -> filterWithThreshold());
-        addToBlacklistButton.setOnAction(e -> addtoBlacklistMenu());
-        Scene scene = new Scene(coursesGridPane, 300, 170);
+        Scene scene = new Scene(coursesGridPane, 300, 125);
         coursesStage.setScene(scene);
         coursesStage.show();
     }
@@ -887,7 +886,7 @@ public class ClassifyGUI extends Application {
         professorsGridPane.setHgap(10);
         professorsGridPane.add(searchByNameButton, 0, 0);
         professorsGridPane.add(searchByClassButton, 0, 1);
-        Scene scene = new Scene(professorsGridPane, 300, 100);
+        Scene scene = new Scene(professorsGridPane, 300, 85);
         searchByNameButton.setOnAction(e -> showProfessorNameSearchWindow());
         searchByClassButton.setOnAction(e -> showSearchProfByClass());
         professorsStage.setScene(scene);
