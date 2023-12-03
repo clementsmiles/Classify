@@ -3,7 +3,10 @@
  * Copyright 2023 Miles Clements, Jake Ross, Justin Darling, Harrison Frisk, Sam Clark
  */
 
+//*****IMPORTANT********
+//REMOVE THIS BEFORE TURNING IN!!!!!!!!!!
 package source;
+//*****IMPORTANT*************************
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
