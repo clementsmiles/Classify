@@ -24,11 +24,13 @@ public class Professor {
         courses.add(c);
     }
     
-    public void printCourse() {
+    public String printCourse() {
         
     for(int i = 0; i < courses.size(); i++) {
-       this.courses.get(i).profDataPrint();
+        
+       return this.courses.get(i).profDataPrint();
     }
+    return name;
     
         
     }

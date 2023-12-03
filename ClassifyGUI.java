@@ -585,6 +585,22 @@ public class ClassifyGUI extends Application {
     }
     
     /**
+     * Searches for and returns all the info about a given professor
+     * @param professor
+     * @return String containing all matching courses information
+     */
+    public static String professorQuery(String professor) {
+        String result = "";
+        for (int i = 0; i < profData.size(); i++) {
+            if ((profData.get(i).getName().equals(professor))) {
+               
+                result += courseData.get(i).getInfo();
+            }
+         }
+        return result;
+    }
+    
+    /**
      * Searches for a professor given a course they teach
      * @param dep Department of course
      * @param num Number of course
@@ -647,12 +663,17 @@ public class ClassifyGUI extends Application {
         Label professorLabel = new Label("Professor");
         Button resultButton = new Button("Search");
         TextArea resultsArea = new TextArea();
+        resultsArea.setEditable(false);
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
         root.getChildren().addAll(professorLabel, professorBox, resultButton, resultsArea);
-        resultButton.setOnAction(e -> resultsArea.setText("Hi"));
-        Scene scene = new Scene(root, 800, 500);
+        resultButton.setOnAction(e -> {
+            String professorName = professorBox.getValue();
+            String result = professorQuery(professorName);
+            resultsArea.setText(result);
+        });
+        Scene scene = new Scene(root, 800, 300);
         profSearchStage.setScene(scene);
         profSearchStage.show();
     }

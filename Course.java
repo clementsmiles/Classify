@@ -75,9 +75,9 @@ public class Course {
         return this.days;
     }
     
-    public void profDataPrint() {
-        System.out.println(this.department + " " + this.courseNum + " " 
-                + this.section);
+    public String profDataPrint() {
+        return (this.department + " " + this.courseNum + " " 
+                + this.section + "\n");
     }
     
     
