@@ -1,9 +1,18 @@
 package source;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,6 +74,45 @@ public class ClassifyGUI extends Application {
             }
         }
         return false;
+    }
+    
+    public static void exportToPDF(String text) {
+        String[] lines = text.split("\n");
+        try {
+            PDDocument output = new PDDocument();
+            PDPage page = new PDPage();
+            output.addPage(page);
+            PDPageContentStream stream = new PDPageContentStream(output, page);
+            PDFont currentFont = new PDType1Font(Standard14Fonts.FontName.TIMES_BOLD);
+            stream.setFont(currentFont, 25);
+            stream.beginText();
+            stream.newLineAtOffset(25, 750);
+            stream.showText("                                      Classify");
+            stream.newLineAtOffset(0, -20);
+            currentFont = new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN);
+            stream.setFont(currentFont, 10);
+            for (int i = 0; i < lines.length; i++) {
+                stream.newLineAtOffset(0, -20);
+                stream.showText(lines[i]);   
+            }
+            stream.endText();
+            stream.close();
+            int fileNum = 0;
+            boolean fileCreated = false;
+            do {
+                File checkFile = new File("output(" + fileNum + ").pdf");
+                if (checkFile.exists()) {
+                    fileNum++;
+                } else {
+                    output.save("output(" + fileNum + ").pdf");
+                    fileCreated = true;
+                }
+            } while (!fileCreated);
+            output.close();
+            System.out.println("PDF created successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public static Professor getProfByName(String name) {
@@ -431,14 +479,16 @@ public class ClassifyGUI extends Application {
         Label depLabel = new Label("Department");
         Label numLabel = new Label("Course Number");
         Button resultButton = new Button("Search!");
+        Button pdfButton = new Button("Save to PDF");
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
         resultsArea.setWrapText(true);
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton);
+        root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton, pdfButton);
         resultButton.setOnAction(e -> resultsArea.setText(courseQuery(departmentBox.getValue(), numField.getText())));
+        pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
         Scene scene = new Scene(root, 800, 500);
         searchStage.setScene(scene);
         searchStage.show();
@@ -492,14 +542,16 @@ public class ClassifyGUI extends Application {
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
         Button resultButton = new Button("Search!");
+        Button pdfButton = new Button("Save to PDF");
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
         resultsArea.setWrapText(true);
-  VBox root = new VBox();
+        VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(depLabel, departmentBox, resultsArea, resultButton);
+        root.getChildren().addAll(depLabel, departmentBox, resultsArea, resultButton, pdfButton);
         resultButton.setOnAction(e -> resultsArea.setText(courseQuery(departmentBox.getValue())));
+        pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
         Scene scene = new Scene(root, 800, 500);
         searchStage.setScene(scene);
         searchStage.show();
@@ -517,14 +569,16 @@ public class ClassifyGUI extends Application {
         Label numLabel = new Label("Course Level");
         Label signLabel = new Label("Greater/Less Than");
         Button resultButton = new Button("Search!");
+        Button pdfButton = new Button("Save to PDF");
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
         resultsArea.setWrapText(true);
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(signLabel, signBox, numLabel, numField, resultsArea, resultButton);
+        root.getChildren().addAll(signLabel, signBox, numLabel, numField, resultsArea, resultButton, pdfButton);
         resultButton.setOnAction(e -> resultsArea.setText(signCourseQuery(signBox.getValue(), numField.getText())));
+        pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
         Scene scene = new Scene(root, 800, 500);
         searchStage.setScene(scene);
         searchStage.show();
