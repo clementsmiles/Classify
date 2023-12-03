@@ -831,15 +831,15 @@ public class ClassifyGUI extends Application {
       */
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
-<<<<<<< Updated upstream
+
         mainStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
-=======
+
         //code for adding classify image
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
         
->>>>>>> Stashed changes
+
         mainStage.setOnCloseRequest(new EventHandler<javafx.stage.WindowEvent>() {
             @Override
             public void handle(javafx.stage.WindowEvent event) {
@@ -857,13 +857,13 @@ public class ClassifyGUI extends Application {
         vbox.setPadding(new Insets(30, 10, 50, 10));
         
         vbox.setAlignment(Pos.CENTER);
-<<<<<<< Updated upstream
+
         vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton);
         Scene scene = new Scene(vbox, 250, 150);
-=======
+
         vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton, addToBlacklistButton, imageView);
         Scene scene = new Scene(vbox, 250, 230);
->>>>>>> Stashed changes
+
         mainStage.setScene(scene);
         mainStage.show();
     }
