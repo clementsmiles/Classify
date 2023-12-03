@@ -20,6 +20,17 @@ public class Professor {
         return this.name;
     }
     
+    public String getInfo() {
+        String s = "";
+        for(int i = 0; i < courses.size(); i++) {
+            s += (courses.get(i).getDepartment() + " " + courses.get(i).getCourseNum() + 
+                     " " + courses.get(i).getDays() + " " + courses.get(i).getTime() + 
+                     " " + courses.get(i).getCRN() + " " +courses.get(i).getProfName() + "\n");
+            
+        }
+        return s;
+    }
+    
     public void addCourse(Course c) {
         courses.add(c);
     }
