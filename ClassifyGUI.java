@@ -349,7 +349,9 @@ public class ClassifyGUI extends Application {
     public ObservableList<String> getAllProfessors() {
         HashSet<String> profList = new HashSet<String>();
         for (int i = 0; i  < profData.size(); i++) {
-            profList.add(profData.get(i).getName());
+        	if (!(profData.get(i).getName().equals("n/a"))) {
+        		profList.add(profData.get(i).getName());
+        	}
         }
         return FXCollections.observableArrayList(profList);
     }
@@ -806,7 +808,7 @@ public class ClassifyGUI extends Application {
       */
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
-        mainStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
+        //mainStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         mainStage.setOnCloseRequest(new EventHandler<javafx.stage.WindowEvent>() {
             @Override
             public void handle(javafx.stage.WindowEvent event) {
