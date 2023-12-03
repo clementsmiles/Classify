@@ -57,11 +57,11 @@ public class ClassifyGUI extends Application {
         profData = new ArrayList<>();
         try {
             readData(courseData);
+            courseData.remove(0);
             backup = deepCopy(backup, courseData);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        courseData.remove(0);
         launch(args);
     }
     /**
