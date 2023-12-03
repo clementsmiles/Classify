@@ -121,7 +121,6 @@ public class ClassifyGUI extends Application {
                 }
             } while (!fileCreated);
             output.close();
-            System.out.println("PDF created successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
