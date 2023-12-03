@@ -594,14 +594,18 @@ public class ClassifyGUI extends Application {
      */
     public String searchProfByClass(String dep, String num) {
         String result = "";
+        HashSet<String> containsMap = new HashSet<>();
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getDepartment().equals(dep)) {
                 if (courseData.get(i).getCourseNum().equals(num)) {
-                    result += courseData.get(i).getProfessor();
-                    result += "\n";
+                	containsMap.add(courseData.get(i).getProfessor());
                 }
             }
-        }   
+        }
+        for (String element : containsMap) {
+            result += element;
+            result += "\n";
+        }
         return result;
     }
     
