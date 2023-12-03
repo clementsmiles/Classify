@@ -946,6 +946,15 @@ public class ClassifyGUI extends Application {
         Button searchButton = new Button("Search by department and course number");
         Button filterByDepartmentButton = new Button("Filter by department");
         Button filterWithButton = new Button("Filter courses with a class level threshold");
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            coursesStage.close();
+        });
+        
         GridPane coursesGridPane = new GridPane();
         coursesGridPane.setPadding(new Insets(10, 10, 10, 10));
         coursesGridPane.setVgap(10);
@@ -953,10 +962,12 @@ public class ClassifyGUI extends Application {
         coursesGridPane.add(searchButton, 0, 0);
         coursesGridPane.add(filterByDepartmentButton, 0, 1);
         coursesGridPane.add(filterWithButton, 0, 2);
+        GridPane.setHalignment(backButton, javafx.geometry.HPos.CENTER);
+        coursesGridPane.add(backButton, 0, 3);
         searchButton.setOnAction(e -> showSearchDandNumWindow());
         filterByDepartmentButton.setOnAction(e -> filterByDepartmentWindow());
         filterWithButton.setOnAction(e -> filterWithThreshold());
-        Scene scene = new Scene(coursesGridPane, 300, 125);
+        Scene scene = new Scene(coursesGridPane, 260, 165);
         coursesStage.setScene(scene);
         coursesStage.show();
     }
@@ -969,13 +980,24 @@ public class ClassifyGUI extends Application {
         professorsStage.setTitle("Professors Menu");
         Button searchByNameButton = new Button("Search professor by name");
         Button searchByClassButton = new Button("Search professors teaching a class");
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            professorsStage.close();
+        });
+        
         GridPane professorsGridPane = new GridPane();
         professorsGridPane.setPadding(new Insets(10, 10, 10, 10));
         professorsGridPane.setVgap(10);
         professorsGridPane.setHgap(10);
         professorsGridPane.add(searchByNameButton, 0, 0);
         professorsGridPane.add(searchByClassButton, 0, 1);
-        Scene scene = new Scene(professorsGridPane, 300, 85);
+        GridPane.setHalignment(backButton, javafx.geometry.HPos.CENTER);
+        professorsGridPane.add(backButton,  0, 3);
+        Scene scene = new Scene(professorsGridPane, 225, 140);
         searchByNameButton.setOnAction(e -> showProfessorNameSearchWindow());
         searchByClassButton.setOnAction(e -> showSearchProfByClass());
         professorsStage.setScene(scene);
