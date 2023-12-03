@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -37,11 +38,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class ClassifyGUI extends Application {
@@ -828,7 +831,15 @@ public class ClassifyGUI extends Application {
       */
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
+<<<<<<< Updated upstream
         mainStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
+=======
+        //code for adding classify image
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        
+>>>>>>> Stashed changes
         mainStage.setOnCloseRequest(new EventHandler<javafx.stage.WindowEvent>() {
             @Override
             public void handle(javafx.stage.WindowEvent event) {
@@ -843,10 +854,16 @@ public class ClassifyGUI extends Application {
         coursesButton.setOnAction(e -> showCoursesWindow());
         professorsButton.setOnAction(e -> showProfessorsWindow());
         VBox vbox = new VBox(10);
-        vbox.setPadding(new Insets(10, 10, 10, 10));
+        vbox.setPadding(new Insets(30, 10, 50, 10));
+        
         vbox.setAlignment(Pos.CENTER);
+<<<<<<< Updated upstream
         vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton);
         Scene scene = new Scene(vbox, 250, 150);
+=======
+        vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton, addToBlacklistButton, imageView);
+        Scene scene = new Scene(vbox, 250, 230);
+>>>>>>> Stashed changes
         mainStage.setScene(scene);
         mainStage.show();
     }
