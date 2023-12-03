@@ -677,6 +677,7 @@ public class ClassifyGUI extends Application {
         Button resultButton = new Button("Search");
         TextField courseField = new TextField();
         TextArea resultsArea = new TextArea();
+        resultsArea.setEditable(false);
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
