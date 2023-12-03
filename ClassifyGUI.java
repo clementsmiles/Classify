@@ -79,6 +79,7 @@ public class ClassifyGUI extends Application {
     public static void exportToPDF(String text) {
         String[] lines = text.split("\n");
         try {
+            int lineCount = 0;
             PDDocument output = new PDDocument();
             PDPage page = new PDPage();
             output.addPage(page);
@@ -93,7 +94,18 @@ public class ClassifyGUI extends Application {
             stream.setFont(currentFont, 10);
             for (int i = 0; i < lines.length; i++) {
                 stream.newLineAtOffset(0, -20);
-                stream.showText(lines[i]);   
+                stream.showText(lines[i]);
+                lineCount++;
+                if (lineCount % 34 == 0) {
+                    PDPage newPage = new PDPage();
+                    output.addPage(newPage);
+                    stream.endText();
+                    stream.close();
+                    stream = new PDPageContentStream(output, newPage);
+                    stream.beginText();
+                    stream.setFont(currentFont, 10);
+                    stream.newLineAtOffset(25, 750);
+                }
             }
             stream.endText();
             stream.close();
@@ -480,9 +492,13 @@ public class ClassifyGUI extends Application {
         Label numLabel = new Label("Course Number");
         Button resultButton = new Button("Search!");
         Button pdfButton = new Button("Save to PDF");
+        pdfButton.setDisable(true);
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
         resultsArea.setWrapText(true);
+        resultsArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            pdfButton.setDisable(newValue.trim().isEmpty());
+        });
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
@@ -543,9 +559,13 @@ public class ClassifyGUI extends Application {
         ComboBox<String> departmentBox = new ComboBox<>(departments);
         Button resultButton = new Button("Search!");
         Button pdfButton = new Button("Save to PDF");
+        pdfButton.setDisable(true);
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
         resultsArea.setWrapText(true);
+        resultsArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            pdfButton.setDisable(newValue.trim().isEmpty());
+        });
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
@@ -570,9 +590,13 @@ public class ClassifyGUI extends Application {
         Label signLabel = new Label("Greater/Less Than");
         Button resultButton = new Button("Search!");
         Button pdfButton = new Button("Save to PDF");
+        pdfButton.setDisable(true);
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
         resultsArea.setWrapText(true);
+        resultsArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            pdfButton.setDisable(newValue.trim().isEmpty());
+        });
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
@@ -595,10 +619,6 @@ public class ClassifyGUI extends Application {
                 "Days"
         );
         ComboBox<String> choiceBox = new ComboBox<>(choices);
-        // I need a combo box which changes the values inside depending
-        // which of choiceBox is currently chosen. The ObservableList for each
-        // is creatable via getAllTimes(), getAllProfessors(), and getAllDays().
-        // If no option is selected in choiceBox, this combobox is unable to be selected.
         ComboBox<String> optionBox = new ComboBox<>();
         optionBox.setDisable(true);
         Button addButton = new Button("Add to blacklist");
