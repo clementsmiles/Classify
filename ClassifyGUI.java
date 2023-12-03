@@ -646,7 +646,7 @@ public class ClassifyGUI extends Application {
         ComboBox<String> professorBox = new ComboBox<>(professors);
         Label professorLabel = new Label("Professor");
         Button resultButton = new Button("Search");
-        TextField resultsArea = new TextField();
+        TextArea resultsArea = new TextArea();
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
