@@ -26,7 +26,7 @@ public class Professor {
     private String[] comments;
     private ArrayList<Course> courses;
     
-    public Professor(String name, ArrayList<Course> courses) {
+    public Professor(String name, ArrayList<Course> courses) throws IOException {
         this.name = name;
         this.courses = courses;
         rateMyProfessor();

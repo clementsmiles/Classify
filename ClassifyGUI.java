@@ -644,7 +644,7 @@ public class ClassifyGUI extends Application {
         for (int i = 0; i < profData.size(); i++) {
             if ((profData.get(i).getName().equals(professor))) {
                
-                result += profData.get(i).getInfo();
+                //result += profData.get(i).getInfo();
                 break;
             }
          }
@@ -708,7 +708,7 @@ public class ClassifyGUI extends Application {
         searchStage.setTitle("Search by department and number");
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
-        
+        searchStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -716,8 +716,6 @@ public class ClassifyGUI extends Application {
         backButton.setOnAction(event -> {
             searchStage.close();
         });
-        
-        
         TextField numField = new TextField();
         Label depLabel = new Label("Department");
         depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
@@ -749,7 +747,7 @@ public class ClassifyGUI extends Application {
         searchStage.setTitle("Search a professor by their name");
         ObservableList<String> professors = getAllProfessors();
         ComboBox<String> professorBox = new ComboBox<>(professors);
-        
+        searchStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -797,7 +795,7 @@ public class ClassifyGUI extends Application {
         depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
-        
+        searchStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -835,7 +833,7 @@ public class ClassifyGUI extends Application {
         depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
-        
+        searchStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -873,7 +871,7 @@ public class ClassifyGUI extends Application {
         searchStage.setTitle("Filter with a class level threshold");
         ObservableList<String> signs = makeSignList();
         ComboBox<String> signBox = new ComboBox<>(signs);
-        
+        searchStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -914,7 +912,7 @@ public class ClassifyGUI extends Application {
     private void addtoBlacklistMenu() {
         Stage searchStage = new Stage();
         searchStage.setTitle("Add to Blacklist");
-        
+        searchStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -990,6 +988,7 @@ public class ClassifyGUI extends Application {
       */
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
+        mainStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -1027,6 +1026,7 @@ public class ClassifyGUI extends Application {
         Button filterByDepartmentButton = new Button("Filter by department");
         Button filterWithButton = new Button("Filter courses with a class level threshold");
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        coursesStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
         Button backButton = new Button("Back", imageView);
@@ -1058,7 +1058,7 @@ public class ClassifyGUI extends Application {
         professorsStage.setTitle("Professors Menu");
         Button searchByNameButton = new Button("Search professor by name");
         Button searchByClassButton = new Button("Search professors teaching a class");
-        
+        professorsStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
