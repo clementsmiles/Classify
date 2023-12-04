@@ -1,6 +1,6 @@
 /**
  * Course Object Class
- * Copyright 2023 Miles Clements
+ * Copyright 2023 Miles Clements, Jake Ross, Justin Darling, Harrison Frisk, Samuel Clark
  */
 
 package source;
