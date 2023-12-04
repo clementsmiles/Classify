@@ -60,7 +60,6 @@ public class ClassifyGUI extends Application {
         profData = new ArrayList<>();
         try {
             readData(courseData);
-            courseData.remove(0);
             backup = deepCopy(backup, courseData);
         } catch (IOException e) {
             e.printStackTrace();
@@ -663,8 +662,8 @@ public class ClassifyGUI extends Application {
         HashSet<String> containsMap = new HashSet<>();
         //error handling 
         if (dep == null && num.equals("")) {
-            result = "Error: Please choose a department \nError: Please choose a course level"
-                    + " (e.g. \"1\", \"2\", \"3\")";
+            result = "Error: Please choose a department \nError: Please enter a course number"
+                    + " (e.g. \"101\", \"274\")";
         return result;
         }
         if (dep == null) {
@@ -672,12 +671,9 @@ public class ClassifyGUI extends Application {
             return result;
         }
         if (num.equals("")) {
-            result = "Error: Please choose a course level (e.g. \"1\", \"2\", \"3\")";
+            result = "Error: Please enter a course number (e.g. \"101\", \"274\")";
             return result;
         }
-        
-        
-       
         
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getDepartment().equals(dep)) {
@@ -811,7 +807,7 @@ public class ClassifyGUI extends Application {
         });
         
         
-        Label courseLabel = new Label("Course");
+        Label courseLabel = new Label("Course Number");
         courseLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button resultButton = new Button("Search");
         TextField courseField = new TextField();
