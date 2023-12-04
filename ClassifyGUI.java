@@ -13,8 +13,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -482,6 +491,53 @@ public class ClassifyGUI extends Application {
         signList.add("Less Than");
         return FXCollections.observableArrayList(signList);
     }
+    
+    public static String rateMyProfessor(String name) throws IOException {     
+        BufferedReader br = new BufferedReader
+                (new FileReader("src\\source\\rateMyProfID.csv"));
+        String line;
+        String id = "";
+        while ((line = br.readLine()) != null) {
+            String[] lines = line.split(",");
+            if (lines[0].equals(name)) {
+                id = lines[1];
+            }
+        }
+       
+        if (id.equals("")) {
+            return "NA";
+        }
+        
+        String url = "https://www.ratemyprofessors.com/professor/"
+                    + id;
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            BufferedReader in = new BufferedReader
+                    (new InputStreamReader(con.getInputStream()));
+
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+
+            }
+            in.close();
+            String html = response.toString();
+            Document doc = Jsoup.parse(html);
+
+            String returnVal = "RateMyProfessor:\n\n";
+            Elements deez1 = doc.select("div.RatingValue__Numerator-qw8sqy-2");
+            for (Element dis : deez1) {
+                returnVal += "Rating: " + dis.html() + " / 5\n\n";
+            }
+            returnVal += "Comments:\n";
+            Elements deez2 = doc.select("div.Comments__StyledComments-dzzyvm-0");
+            for (Element dis : deez2) {
+                returnVal += dis.html() + "\n";
+            }
+            return returnVal;
+    }
+
     
     
     // End backend methods
