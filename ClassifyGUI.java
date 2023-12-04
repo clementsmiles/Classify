@@ -77,7 +77,8 @@ public class ClassifyGUI extends Application {
             copyTo.clear();
         }
         copyTo.clear();
-        for (int i = 0; i < toCopy.size(); i++) {
+        for (int i = 1; i < toCopy.size(); i++) {
+        	// changed i=0 to i=1, so "Subject"/First line content doesn't get added
             copyTo.add(toCopy.get(i));
         }
         return copyTo;
@@ -404,7 +405,12 @@ public class ClassifyGUI extends Application {
      * @param value Value to remove
      */
     public void addBlackListGuide(String category, String value) {
+    	if (value == null) {
+    		category = "NULL_VALUE";
+    	}
         switch (category) {
+        case "NULL_VALUE": // don't access/add anything
+        	break;
         case "Professor":
             courseData = blackListProfessor(value);
             break;
@@ -416,6 +422,7 @@ public class ClassifyGUI extends Application {
             break;
         }
     }
+    
     
     /**
      * Adds a professor to the blacklist.
@@ -510,11 +517,26 @@ public class ClassifyGUI extends Application {
      */
     public static String courseQuery(String department, String courseNum) {
         String result = "";
+        if (courseNum.equals("") && department == null) {
+        	result = "Error: Pick a department!\nError: Enter a course number!";
+        	return result;
+        }
+        if (courseNum.equals("")) {
+        	result = "Error: Enter a course number!";
+        	return result;
+        }
+        if (department == null) {
+        	result = "Error: Pick a department!";
+        	return result;
+        }
         for (int i = 0; i < courseData.size(); i++) {
             if (checkEquality(courseData.get(i), department, courseNum)) {
                 result += courseData.get(i).getInfo();
             }
-         }
+        }
+        if (result.equals("")) {
+        	result = "No data matches the search condition.";
+        }
         return result;
     }
     
@@ -525,11 +547,18 @@ public class ClassifyGUI extends Application {
      */
     public static String courseQuery(String department) {
         String result = "";
+        if (department == null) {
+        	result = "Error: Pick a department";
+        	return result;
+        }
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getDepartment().equals(department)) {
                 result += courseData.get(i).getInfo();
             }
-         }
+        }
+        if (result.equals("")) {
+        	result = "No data matches the search condition.";
+        }
         return result;
     }
     
@@ -541,8 +570,21 @@ public class ClassifyGUI extends Application {
      * @return String of matching courses info
      */
     public static String signCourseQuery(String sign, String courseNum) {
+    	String result = "";
+    	// account for null
+    	if (sign == null && courseNum.equals("")) {
+    		result = "Error: Pick a sign!\nerror: Enter a course number!";
+    		return result;
+    	}
+    	if (sign == null) {
+    		result = "Error: Pick a sign!";
+    		return result;
+    	}
+    	if (courseNum.equals("")) {
+    		result = "Error: Enter a course number!";
+    		return result;
+    	}
     	// make variables / accounting for 1/2/3/4
-        String result = "";
         if (courseNum.equals("1")) {
         	courseNum = "100";
         }
@@ -582,6 +624,9 @@ public class ClassifyGUI extends Application {
         			result += courseData.get(i).getInfo();
         		}
         	}
+        }
+        if (result.equals("")) {
+        	result = "No data matches the search conditions.";
         }
         return result;
     }
@@ -824,7 +869,11 @@ public class ClassifyGUI extends Application {
         
         addButton.setOnAction(e -> {
             addBlackListGuide(choiceBox.getValue(), optionBox.getValue());
-            result.setText("Added " + optionBox.getValue() + " to the blacklist");
+        if (optionBox.getValue() == null) {
+        	result.setText("Pick an option to blacklist");
+        } else {
+        	result.setText("Added " + optionBox.getValue() + " to the blacklist");
+        }
         });
         resetButton.setOnAction(e -> {
             courseData = deepCopy(courseData, backup);
