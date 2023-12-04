@@ -803,7 +803,7 @@ public class ClassifyGUI extends Application {
         searchStage.setTitle("Search a professor by their name");
         ObservableList<String> professors = getAllProfessors();
         ComboBox<String> professorBox = new ComboBox<>(professors);
-        searchStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
+        
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -829,10 +829,17 @@ public class ClassifyGUI extends Application {
         resultButton.setOnAction(e -> {
             String professorName = professorBox.getValue();
             String result = professorQuery(professorName);
+            String rateMyProfessorInfo;
+            try {
+                rateMyProfessorInfo = rateMyProfessor(professorName);
+            } catch (Exception E) {
+                rateMyProfessorInfo = "N/A";
+            }
             if(result == "") {
                 resultsArea.setText("Error: Choose a professor!");
             } else {
             resultsArea.setText(result);
+            rateMyProfessorOutput.setText(rateMyProfessorInfo);
             }
         });
         
