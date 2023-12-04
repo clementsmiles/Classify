@@ -615,6 +615,25 @@ public class ClassifyGUI extends Application {
     public String searchProfByClass(String dep, String num) {
         String result = "";
         HashSet<String> containsMap = new HashSet<>();
+        
+        //error handling 
+        if (dep == null && num.equals("")) {
+            result = "Error: Please choose a department \nError: Please choose a course level"
+                    + " (e.g. \"1\", \"2\", \"3\")";
+        return result;
+        }
+        if (dep == null) {
+            result = "Error: Please choose a department";  
+            return result;
+        }
+        if (num.equals("")) {
+            result = "Error: Please choose a course level (e.g. \"1\", \"2\", \"3\")";
+            return result;
+        }
+        
+        
+       
+        
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getDepartment().equals(dep)) {
                 if (courseData.get(i).getCourseNum().equals(num)) {
@@ -622,6 +641,19 @@ public class ClassifyGUI extends Application {
                 }
             }
         }
+        
+        if(containsMap.isEmpty()) {
+            result = "No data matches the search conditions.";
+            return result;
+        }
+        
+      //if(courseField.getText() == null) {
+        //  resultsArea.setText("Error: Please choose a course level (e.g. \"1\", \"2\", \"3\")");
+      //}
+      //if(departmentBox.getValue() == "") {
+      //    resultsArea.setText("Error: Please choose a department");
+      //}
+        
         for (String element : containsMap) {
             result += element;
             result += "\n";
@@ -676,7 +708,7 @@ public class ClassifyGUI extends Application {
         searchStage.show();
     }
     
-    //incomplete as of 11/30/2023
+    
     private void showProfessorNameSearchWindow() {
         Stage searchStage = new Stage();
         searchStage.setTitle("Search a professor by their name");
@@ -704,7 +736,11 @@ public class ClassifyGUI extends Application {
         resultButton.setOnAction(e -> {
             String professorName = professorBox.getValue();
             String result = professorQuery(professorName);
+            if(result == "") {
+                resultsArea.setText("Error: Choose a professor!");
+            } else {
             resultsArea.setText(result);
+            }
         });
         Scene scene = new Scene(root, 800, 300);
         searchStage.setScene(scene);
@@ -741,7 +777,10 @@ public class ClassifyGUI extends Application {
         root.setSpacing(10);
         root.setPadding(new Insets(10));
         root.getChildren().addAll(depLabel, departmentBox, courseLabel, courseField, resultButton, resultsArea, backButton);
-        resultButton.setOnAction(e -> resultsArea.setText(searchProfByClass(departmentBox.getValue(), courseField.getText())));
+        resultButton.setOnAction(e -> resultsArea.setText(searchProfByClass(departmentBox.getValue(),
+                courseField.getText())));
+        
+        
         Scene scene = new Scene(root, 800, 390);
         searchStage.setScene(scene);
         searchStage.show();
