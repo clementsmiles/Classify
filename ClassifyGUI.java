@@ -644,7 +644,7 @@ public class ClassifyGUI extends Application {
         for (int i = 0; i < profData.size(); i++) {
             if ((profData.get(i).getName().equals(professor))) {
                
-                //result += profData.get(i).getInfo();
+                result += profData.get(i).getInfo();
                 break;
             }
          }
