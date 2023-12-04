@@ -729,10 +729,14 @@ public class ClassifyGUI extends Application {
         Button resultButton = new Button("Search");
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
+        TextArea rateMyProfessorOutput = new TextArea();
+        rateMyProfessorOutput.setEditable(false);
+        
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(professorLabel, professorBox, resultButton, resultsArea, backButton);
+        root.getChildren().addAll(professorLabel, professorBox, resultButton, resultsArea,
+                rateMyProfessorOutput, backButton);
         resultButton.setOnAction(e -> {
             String professorName = professorBox.getValue();
             String result = professorQuery(professorName);
@@ -742,6 +746,7 @@ public class ClassifyGUI extends Application {
             resultsArea.setText(result);
             }
         });
+        
         Scene scene = new Scene(root, 800, 300);
         searchStage.setScene(scene);
         searchStage.show();
