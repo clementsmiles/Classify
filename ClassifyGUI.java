@@ -1,13 +1,8 @@
-/*
+/**
  * Classify Application
  * Copyright 2023 Miles Clements, Jake Ross, Justin Darling, Harrison Frisk, Samuel Clark
  */
 
-//*****EXTREMELY IMPORTANT IMPORTANT********
-//REMOVE THIS package source BEFORE TURNING IN!!!!!!!!!!
-//ALSO CHANGE .CSV FILE LOCATION TO src\\courseData.csv
-package source;
-//*****IMPORTANT*************************
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -317,7 +312,7 @@ public class ClassifyGUI extends Application {
      * @throws IOException thrown if .csv file not found
      */
     public static void readData(ArrayList<Course> courseData) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("src\\source\\courseData.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("src\\courseData.csv"));
         String line;
         br.readLine();
         while ((line = br.readLine()) != null) {
@@ -500,7 +495,7 @@ public class ClassifyGUI extends Application {
      */
     public static String rateMyProfessor(String name) throws IOException {     
         BufferedReader br = new BufferedReader
-                (new FileReader("src\\source\\rateMyProfID.csv"));
+                (new FileReader("src\\rateMyProfID.csv"));
         String line;
         String id = "";
         while ((line = br.readLine()) != null) {

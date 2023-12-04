@@ -3,8 +3,6 @@
  * Copyright 2023 Miles Clements, Jake Ross, Justin Darling, Harrison Frisk, Samuel Clark
  */
 
-package source;
-
 public class Course {
 
     private String courseRegNum;
