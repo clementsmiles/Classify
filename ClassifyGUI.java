@@ -492,6 +492,12 @@ public class ClassifyGUI extends Application {
         return FXCollections.observableArrayList(signList);
     }
     
+    /**
+     * Gets a professor's RateMyProfessor score and reviews.
+     * @param name Name to search
+     * @return RateMyProfessor score and reviews.
+     * @throws IOException
+     */
     public static String rateMyProfessor(String name) throws IOException {     
         BufferedReader br = new BufferedReader
                 (new FileReader("src\\source\\rateMyProfID.csv"));
