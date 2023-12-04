@@ -57,7 +57,6 @@ public class ClassifyGUI extends Application {
         profData = new ArrayList<>();
         try {
             readData(courseData);
-            courseData.remove(0);
             backup = deepCopy(backup, courseData);
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,8 +76,7 @@ public class ClassifyGUI extends Application {
             copyTo.clear();
         }
         copyTo.clear();
-        for (int i = 1; i < toCopy.size(); i++) {
-        	// changed i=0 to i=1, so "Subject"/First line content doesn't get added
+        for (int i = 0; i < toCopy.size(); i++) {
             copyTo.add(toCopy.get(i));
         }
         return copyTo;
@@ -309,6 +307,7 @@ public class ClassifyGUI extends Application {
     public static void readData(ArrayList<Course> courseData) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src\\source\\courseData.csv"));
         String line;
+        br.readLine();
         while ((line = br.readLine()) != null) {
             String[] lines = line.split(",");
             if (lines.length > 9) {
@@ -354,6 +353,7 @@ public class ClassifyGUI extends Application {
         		profList.add(profData.get(i).getName());
         	}
         }
+        
         return FXCollections.observableArrayList(profList);
     }
     
