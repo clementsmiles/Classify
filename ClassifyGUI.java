@@ -311,6 +311,7 @@ public class ClassifyGUI extends Application {
     public static void readData(ArrayList<Course> courseData) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src\\source\\courseData.csv"));
         String line;
+        br.readLine();
         while ((line = br.readLine()) != null) {
             String[] lines = line.split(",");
             if (lines.length > 9) {
@@ -355,7 +356,8 @@ public class ClassifyGUI extends Application {
             if (!(profData.get(i).getName().equals("n/a"))) {
                 profList.add(profData.get(i).getName());
             }
-        }
+
+        } 
         return FXCollections.observableArrayList(profList);
     }
     
@@ -407,7 +409,12 @@ public class ClassifyGUI extends Application {
      * @param value Value to remove
      */
     public void addBlackListGuide(String category, String value) {
+    	if (value == null) {
+    		category = "NULL_VALUE";
+    	}
         switch (category) {
+        case "NULL_VALUE": // don't access/add anything
+        	break;
         case "Professor":
             courseData = blackListProfessor(value);
             break;
@@ -419,6 +426,7 @@ public class ClassifyGUI extends Application {
             break;
         }
     }
+    
     
     /**
      * Adds a professor to the blacklist.
@@ -513,11 +521,26 @@ public class ClassifyGUI extends Application {
      */
     public static String courseQuery(String department, String courseNum) {
         String result = "";
+        if (courseNum.equals("") && department == null) {
+        	result = "Error: Pick a department!\nError: Enter a course number!";
+        	return result;
+        }
+        if (courseNum.equals("")) {
+        	result = "Error: Enter a course number!";
+        	return result;
+        }
+        if (department == null) {
+        	result = "Error: Pick a department!";
+        	return result;
+        }
         for (int i = 0; i < courseData.size(); i++) {
             if (checkEquality(courseData.get(i), department, courseNum)) {
                 result += courseData.get(i).getInfo();
             }
-         }
+        }
+        if (result.equals("")) {
+        	result = "No data matches the search condition.";
+        }
         return result;
     }
     
@@ -528,11 +551,18 @@ public class ClassifyGUI extends Application {
      */
     public static String courseQuery(String department) {
         String result = "";
+        if (department == null) {
+        	result = "Error: Pick a department";
+        	return result;
+        }
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getDepartment().equals(department)) {
                 result += courseData.get(i).getInfo();
             }
-         }
+        }
+        if (result.equals("")) {
+        	result = "No data matches the search condition.";
+        }
         return result;
     }
     
@@ -544,8 +574,21 @@ public class ClassifyGUI extends Application {
      * @return String of matching courses info
      */
     public static String signCourseQuery(String sign, String courseNum) {
-        // make variables / accounting for 1/2/3/4
-        String result = "";
+    	String result = "";
+    	// account for null
+    	if (sign == null && courseNum.equals("")) {
+    		result = "Error: Pick a sign!\nerror: Enter a course number!";
+    		return result;
+    	}
+    	if (sign == null) {
+    		result = "Error: Pick a sign!";
+    		return result;
+    	}
+    	if (courseNum.equals("")) {
+    		result = "Error: Enter a course number!";
+    		return result;
+    	}
+    	// make variables / accounting for 1/2/3/4
         if (courseNum.equals("1")) {
             courseNum = "100";
         }
@@ -586,6 +629,9 @@ public class ClassifyGUI extends Application {
                 }
             }
         }
+        if (result.equals("")) {
+        	result = "No data matches the search conditions.";
+        }
         return result;
     }
     
@@ -615,7 +661,6 @@ public class ClassifyGUI extends Application {
     public String searchProfByClass(String dep, String num) {
         String result = "";
         HashSet<String> containsMap = new HashSet<>();
-        
         //error handling 
         if (dep == null && num.equals("")) {
             result = "Error: Please choose a department \nError: Please choose a course level"
@@ -647,12 +692,6 @@ public class ClassifyGUI extends Application {
             return result;
         }
         
-      //if(courseField.getText() == null) {
-        //  resultsArea.setText("Error: Please choose a course level (e.g. \"1\", \"2\", \"3\")");
-      //}
-      //if(departmentBox.getValue() == "") {
-      //    resultsArea.setText("Error: Please choose a department");
-      //}
         
         for (String element : containsMap) {
             result += element;
@@ -784,11 +823,10 @@ public class ClassifyGUI extends Application {
         root.getChildren().addAll(depLabel, departmentBox, courseLabel, courseField, resultButton, resultsArea, backButton);
         resultButton.setOnAction(e -> resultsArea.setText(searchProfByClass(departmentBox.getValue(),
                 courseField.getText())));
-        
-        
         Scene scene = new Scene(root, 800, 390);
         searchStage.setScene(scene);
         searchStage.show();
+
     }
   
     /**
@@ -930,7 +968,11 @@ public class ClassifyGUI extends Application {
         
         addButton.setOnAction(e -> {
             addBlackListGuide(choiceBox.getValue(), optionBox.getValue());
-            result.setText("Added " + optionBox.getValue() + " to the blacklist");
+        if (optionBox.getValue() == null) {
+        	result.setText("Pick an option to blacklist");
+        } else {
+        	result.setText("Added " + optionBox.getValue() + " to the blacklist");
+        }
         });
         resetButton.setOnAction(e -> {
             courseData = deepCopy(courseData, backup);
@@ -952,11 +994,9 @@ public class ClassifyGUI extends Application {
       */
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
-        
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
-        
         mainStage.setOnCloseRequest(new EventHandler<javafx.stage.WindowEvent>() {
             @Override
             public void handle(javafx.stage.WindowEvent event) {
@@ -990,7 +1030,6 @@ public class ClassifyGUI extends Application {
         Button searchButton = new Button("Search by department and course number");
         Button filterByDepartmentButton = new Button("Filter by department");
         Button filterWithButton = new Button("Filter courses with a class level threshold");
-        
         InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
         Image image = new Image(stream);
         ImageView imageView = new ImageView(image);
@@ -998,7 +1037,6 @@ public class ClassifyGUI extends Application {
         backButton.setOnAction(event -> {
             coursesStage.close();
         });
-        
         GridPane coursesGridPane = new GridPane();
         coursesGridPane.setPadding(new Insets(10, 10, 10, 10));
         coursesGridPane.setVgap(10);
