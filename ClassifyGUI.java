@@ -533,7 +533,7 @@ public class ClassifyGUI extends Application {
             returnVal += "Comments:\n";
             Elements deez2 = doc.select("div.Comments__StyledComments-dzzyvm-0");
             for (Element dis : deez2) {
-                returnVal += dis.html() + "\n";
+                returnVal += dis.html() + "\n\n";
             }
             return returnVal;
     }
@@ -843,7 +843,7 @@ public class ClassifyGUI extends Application {
             }
         });
         
-        Scene scene = new Scene(root, 800, 300);
+        Scene scene = new Scene(root, 800, 500);
         searchStage.setScene(scene);
         searchStage.show();
     }
