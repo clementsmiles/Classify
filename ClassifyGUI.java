@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -37,11 +38,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ClassifyGUI extends Application {
@@ -57,6 +60,7 @@ public class ClassifyGUI extends Application {
         profData = new ArrayList<>();
         try {
             readData(courseData);
+            courseData.remove(0);
             backup = deepCopy(backup, courseData);
         } catch (IOException e) {
             e.printStackTrace();
@@ -349,11 +353,11 @@ public class ClassifyGUI extends Application {
     public ObservableList<String> getAllProfessors() {
         HashSet<String> profList = new HashSet<String>();
         for (int i = 0; i  < profData.size(); i++) {
-        	if (!(profData.get(i).getName().equals("n/a"))) {
-        		profList.add(profData.get(i).getName());
-        	}
-        }
-        
+            if (!(profData.get(i).getName().equals("n/a"))) {
+                profList.add(profData.get(i).getName());
+            }
+
+        } 
         return FXCollections.observableArrayList(profList);
     }
     
@@ -586,44 +590,44 @@ public class ClassifyGUI extends Application {
     	}
     	// make variables / accounting for 1/2/3/4
         if (courseNum.equals("1")) {
-        	courseNum = "100";
+            courseNum = "100";
         }
         if (courseNum.equals("2")) {
-        	courseNum = "200";
+            courseNum = "200";
         }
         if (courseNum.equals("3")) {
-        	courseNum = "300";
+            courseNum = "300";
         }
         if (courseNum.equals("4")) {
-        	courseNum = "400";
+            courseNum = "400";
         }
         int num = Integer.parseInt(courseNum);
         boolean lessOrGreater = false; // false = greater than
         // figure out the sign
         if (sign.equals("Less Than")) {
-        	lessOrGreater = true; // true = less than
+            lessOrGreater = true; // true = less than
         }
         // loop through
         for (int i = 1; i < courseData.size(); i++) {
-        	String current = courseData.get(i).getCourseNum();
-        	int currentNum;
-        	try {
-        		currentNum = Integer.parseInt(current);
-        	} catch (Exception e) {
-        		current = courseData.get(i).getCourseNum();
-        		current = current.substring(0, current.length() - 1);
-        		currentNum = Integer.parseInt(current);
-        	}
-        	
-        	if (lessOrGreater == true) { // less than
-        		if (currentNum <= num) {
-        			result += courseData.get(i).getInfo();
-        		}
-        	} else { // more than
-        		if (currentNum > num) {
-        			result += courseData.get(i).getInfo();
-        		}
-        	}
+            String current = courseData.get(i).getCourseNum();
+            int currentNum;
+            try {
+                currentNum = Integer.parseInt(current);
+            } catch (Exception e) {
+                current = courseData.get(i).getCourseNum();
+                current = current.substring(0, current.length() - 1);
+                currentNum = Integer.parseInt(current);
+            }
+            
+            if (lessOrGreater == true) { // less than
+                if (currentNum <= num) {
+                    result += courseData.get(i).getInfo();
+                }
+            } else { // more than
+                if (currentNum > num) {
+                    result += courseData.get(i).getInfo();
+                }
+            }
         }
         if (result.equals("")) {
         	result = "No data matches the search conditions.";
@@ -657,13 +661,38 @@ public class ClassifyGUI extends Application {
     public String searchProfByClass(String dep, String num) {
         String result = "";
         HashSet<String> containsMap = new HashSet<>();
+        //error handling 
+        if (dep == null && num.equals("")) {
+            result = "Error: Please choose a department \nError: Please choose a course level"
+                    + " (e.g. \"1\", \"2\", \"3\")";
+        return result;
+        }
+        if (dep == null) {
+            result = "Error: Please choose a department";  
+            return result;
+        }
+        if (num.equals("")) {
+            result = "Error: Please choose a course level (e.g. \"1\", \"2\", \"3\")";
+            return result;
+        }
+        
+        
+       
+        
         for (int i = 0; i < courseData.size(); i++) {
             if (courseData.get(i).getDepartment().equals(dep)) {
                 if (courseData.get(i).getCourseNum().equals(num)) {
-                	containsMap.add(courseData.get(i).getProfessor());
+                    containsMap.add(courseData.get(i).getProfessor());
                 }
             }
         }
+        
+        if(containsMap.isEmpty()) {
+            result = "No data matches the search conditions.";
+            return result;
+        }
+        
+        
         for (String element : containsMap) {
             result += element;
             result += "\n";
@@ -683,6 +712,16 @@ public class ClassifyGUI extends Application {
         searchStage.setTitle("Search by department and number");
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            searchStage.close();
+        });
+        
+        
         TextField numField = new TextField();
         Label depLabel = new Label("Department");
         depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
@@ -700,7 +739,7 @@ public class ClassifyGUI extends Application {
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton, pdfButton);
+        root.getChildren().addAll(depLabel, departmentBox, numLabel, numField, resultsArea, resultButton, pdfButton, backButton);
         resultButton.setOnAction(e -> resultsArea.setText(courseQuery(departmentBox.getValue(), numField.getText())));
         pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
         Scene scene = new Scene(root, 800, 410);
@@ -708,41 +747,70 @@ public class ClassifyGUI extends Application {
         searchStage.show();
     }
     
-    //incomplete as of 11/30/2023
+    
     private void showProfessorNameSearchWindow() {
-        Stage profSearchStage = new Stage();
-        profSearchStage.setTitle("Search a professor by their name");
+        Stage searchStage = new Stage();
+        searchStage.setTitle("Search a professor by their name");
         ObservableList<String> professors = getAllProfessors();
         ComboBox<String> professorBox = new ComboBox<>(professors);
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            searchStage.close();
+        });
+        
+        
         Label professorLabel = new Label("Professor");
         professorLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button resultButton = new Button("Search");
         TextArea resultsArea = new TextArea();
         resultsArea.setEditable(false);
+        TextArea rateMyProfessorOutput = new TextArea();
+        rateMyProfessorOutput.setEditable(false);
+        
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(professorLabel, professorBox, resultButton, resultsArea);
+        root.getChildren().addAll(professorLabel, professorBox, resultButton, resultsArea,
+                rateMyProfessorOutput, backButton);
         resultButton.setOnAction(e -> {
             String professorName = professorBox.getValue();
             String result = professorQuery(professorName);
+            if(result == "") {
+                resultsArea.setText("Error: Choose a professor!");
+            } else {
             resultsArea.setText(result);
+            }
         });
+        
         Scene scene = new Scene(root, 800, 300);
-        profSearchStage.setScene(scene);
-        profSearchStage.show();
+        searchStage.setScene(scene);
+        searchStage.show();
     }
     
     /**
      * Shows the menu for searching a professor by course.
      */
     private void showSearchProfByClass() {
-        Stage profSearchStage = new Stage();
-        profSearchStage.setTitle("Search for professors by course");
+        Stage searchStage = new Stage();
+        searchStage.setTitle("Search for professors by course");
         Label depLabel = new Label("Department");
         depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            searchStage.close();
+        });
+        
+        
         Label courseLabel = new Label("Course");
         courseLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         Button resultButton = new Button("Search");
@@ -752,11 +820,13 @@ public class ClassifyGUI extends Application {
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(depLabel, departmentBox, courseLabel, courseField, resultButton, resultsArea);
-        resultButton.setOnAction(e -> resultsArea.setText(searchProfByClass(departmentBox.getValue(), courseField.getText())));
+        root.getChildren().addAll(depLabel, departmentBox, courseLabel, courseField, resultButton, resultsArea, backButton);
+        resultButton.setOnAction(e -> resultsArea.setText(searchProfByClass(departmentBox.getValue(),
+                courseField.getText())));
         Scene scene = new Scene(root, 800, 390);
-        profSearchStage.setScene(scene);
-        profSearchStage.show();
+        searchStage.setScene(scene);
+        searchStage.show();
+
     }
   
     /**
@@ -769,6 +839,16 @@ public class ClassifyGUI extends Application {
         depLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
         ObservableList<String> departments = getAllDepartments();
         ComboBox<String> departmentBox = new ComboBox<>(departments);
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            searchStage.close();
+        });
+        
+        
         Button resultButton = new Button("Search!");
         Button pdfButton = new Button("Save to PDF");
         pdfButton.setDisable(true);
@@ -781,7 +861,7 @@ public class ClassifyGUI extends Application {
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(depLabel, departmentBox, resultsArea, resultButton, pdfButton);
+        root.getChildren().addAll(depLabel, departmentBox, resultsArea, resultButton, pdfButton, backButton);
         resultButton.setOnAction(e -> resultsArea.setText(courseQuery(departmentBox.getValue())));
         pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
         Scene scene = new Scene(root, 800, 350);
@@ -797,6 +877,15 @@ public class ClassifyGUI extends Application {
         searchStage.setTitle("Filter with a class level threshold");
         ObservableList<String> signs = makeSignList();
         ComboBox<String> signBox = new ComboBox<>(signs);
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            searchStage.close();
+        });
+        
         TextField numField = new TextField();
         Label numLabel = new Label("Course Level");
         numLabel.setFont(Font.font("Ariel", FontWeight.BOLD, 20));
@@ -814,7 +903,7 @@ public class ClassifyGUI extends Application {
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(signLabel, signBox, numLabel, numField, resultsArea, resultButton, pdfButton);
+        root.getChildren().addAll(signLabel, signBox, numLabel, numField, resultsArea, resultButton, pdfButton, backButton);
         resultButton.setOnAction(e -> resultsArea.setText(signCourseQuery(signBox.getValue(), numField.getText())));
         pdfButton.setOnAction(e -> exportToPDF(resultsArea.getText()));
         Scene scene = new Scene(root, 800, 400);
@@ -829,6 +918,16 @@ public class ClassifyGUI extends Application {
     private void addtoBlacklistMenu() {
         Stage searchStage = new Stage();
         searchStage.setTitle("Add to Blacklist");
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            searchStage.close();
+        });
+        
+        
         ObservableList<String> choices = FXCollections.observableArrayList(
                 "Professor",
                 "Time",
@@ -884,8 +983,8 @@ public class ClassifyGUI extends Application {
         root.setAlignment(Pos.CENTER);
         root.setSpacing(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(categoryLabel, choiceBox, optionLabel, optionBox, addButton, result, resetButton);
-        Scene scene = new Scene(root, 250, 265);
+        root.getChildren().addAll(categoryLabel, choiceBox, optionLabel, optionBox, addButton, result, resetButton, backButton);
+        Scene scene = new Scene(root, 250, 300);
         searchStage.setScene(scene);
         searchStage.show();
     }
@@ -895,7 +994,9 @@ public class ClassifyGUI extends Application {
       */
     public void start(Stage mainStage) {
         mainStage.setTitle("Classify");
-        //mainStage.getIcons().add(new Image(ClassifyGUI.class.getResourceAsStream("classify.png")));
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
         mainStage.setOnCloseRequest(new EventHandler<javafx.stage.WindowEvent>() {
             @Override
             public void handle(javafx.stage.WindowEvent event) {
@@ -914,8 +1015,8 @@ public class ClassifyGUI extends Application {
         VBox vbox = new VBox(10);
         vbox.setPadding(new Insets(10, 10, 10, 10));
         vbox.setAlignment(Pos.CENTER);
-        vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton, addToBlacklistButton);
-        Scene scene = new Scene(vbox, 250, 175);
+        vbox.getChildren().addAll(titleLabel, coursesButton, professorsButton, addToBlacklistButton, imageView);
+        Scene scene = new Scene(vbox, 250, 215);
         mainStage.setScene(scene);
         mainStage.show();
     }
@@ -929,6 +1030,13 @@ public class ClassifyGUI extends Application {
         Button searchButton = new Button("Search by department and course number");
         Button filterByDepartmentButton = new Button("Filter by department");
         Button filterWithButton = new Button("Filter courses with a class level threshold");
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            coursesStage.close();
+        });
         GridPane coursesGridPane = new GridPane();
         coursesGridPane.setPadding(new Insets(10, 10, 10, 10));
         coursesGridPane.setVgap(10);
@@ -936,10 +1044,12 @@ public class ClassifyGUI extends Application {
         coursesGridPane.add(searchButton, 0, 0);
         coursesGridPane.add(filterByDepartmentButton, 0, 1);
         coursesGridPane.add(filterWithButton, 0, 2);
+        GridPane.setHalignment(backButton, javafx.geometry.HPos.CENTER);
+        coursesGridPane.add(backButton, 0, 3);
         searchButton.setOnAction(e -> showSearchDandNumWindow());
         filterByDepartmentButton.setOnAction(e -> filterByDepartmentWindow());
         filterWithButton.setOnAction(e -> filterWithThreshold());
-        Scene scene = new Scene(coursesGridPane, 300, 125);
+        Scene scene = new Scene(coursesGridPane, 260, 165);
         coursesStage.setScene(scene);
         coursesStage.show();
     }
@@ -952,13 +1062,24 @@ public class ClassifyGUI extends Application {
         professorsStage.setTitle("Professors Menu");
         Button searchByNameButton = new Button("Search professor by name");
         Button searchByClassButton = new Button("Search professors teaching a class");
+        
+        InputStream stream = ClassifyGUI.class.getResourceAsStream("classify.png");
+        Image image = new Image(stream);
+        ImageView imageView = new ImageView(image);
+        Button backButton = new Button("Back", imageView);
+        backButton.setOnAction(event -> {
+            professorsStage.close();
+        });
+        
         GridPane professorsGridPane = new GridPane();
         professorsGridPane.setPadding(new Insets(10, 10, 10, 10));
         professorsGridPane.setVgap(10);
         professorsGridPane.setHgap(10);
         professorsGridPane.add(searchByNameButton, 0, 0);
         professorsGridPane.add(searchByClassButton, 0, 1);
-        Scene scene = new Scene(professorsGridPane, 300, 85);
+        GridPane.setHalignment(backButton, javafx.geometry.HPos.CENTER);
+        professorsGridPane.add(backButton,  0, 3);
+        Scene scene = new Scene(professorsGridPane, 225, 140);
         searchByNameButton.setOnAction(e -> showProfessorNameSearchWindow());
         searchByClassButton.setOnAction(e -> showSearchProfByClass());
         professorsStage.setScene(scene);
